@@ -24,14 +24,14 @@ body, html, #root {
   padding: 20px;
 }
 
-/* Outer layout wrapper - Made significantly bigger and wider */
+/* Outer layout wrapper */
 .timer-card {
   width: 100%;
-  max-width: 900px; /* Increased from 650px to make it wider */
+  max-width: 900px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  padding: 70px 60px; /* Increased padding for a larger, more spacious feel */
+  padding: 70px 60px;
   border-radius: 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -79,7 +79,7 @@ body, html, #root {
 
 .time-number {
   color: #ffffff;
-  font-size: 96px; /* Greatly increased for a bold, dominant look */
+  font-size: 96px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -2px;
@@ -87,7 +87,7 @@ body, html, #root {
 
 .time-colon {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 80px; /* Scaled up to match the numbers */
+  font-size: 80px;
   font-weight: 700;
   margin-top: -30px;
 }
@@ -118,6 +118,7 @@ body, html, #root {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-pink {
@@ -171,6 +172,7 @@ body, html, #root {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .splash-icon {
@@ -195,7 +197,7 @@ body, html, #root {
 .loading-dots {
   font-size: 14px;
   font-weight: 600;
-  color: #fce18a; /* A nice contrasting gold/yellow */
+  color: #fce18a;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -215,7 +217,6 @@ body, html, #root {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Animated ellipses for the loading text */
 .loading-dots span {
   animation: blink 1.4s infinite both;
 }
@@ -232,4 +233,92 @@ body, html, #root {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
   100% { opacity: 0.2; }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN FOR IPHONES & IPADS
+   ========================================== */
+
+/* Tablets (iPad / iPad mini portrait/landscape) */
+@media screen and (max-width: 768px) {
+  .challenge-container {
+    padding: 16px;
+  }
+
+  .timer-card {
+    padding: 40px 30px;
+    max-width: 100%;
+  }
+
+  .time-number {
+    font-size: 72px;
+  }
+
+  .time-colon {
+    font-size: 60px;
+    margin-top: -22px;
+  }
+}
+
+/* Smaller Mobile Screens (iPhone SE, iPhone 13/14/15 standard & smaller) */
+@media screen and (max-width: 480px) {
+  .challenge-container {
+    padding: 12px;
+    min-height: 100dvh;
+    align-items: center;
+  }
+
+  .timer-card {
+    padding: 30px 16px;
+    border-radius: 20px;
+  }
+
+  .timer-header {
+    margin-bottom: 20px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .timer-display {
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .time-number {
+    font-size: 52px; /* Scaled down perfectly to fit standard iPhone screens horizontally */
+    letter-spacing: -1px;
+  }
+
+  .time-colon {
+    font-size: 44px;
+    margin-top: -16px;
+  }
+
+  .time-label {
+    font-size: 10px;
+  }
+
+  .button-group {
+    flex-direction: column; /* Stacks buttons vertically on narrow phones for easy thumb tapping */
+    gap: 10px;
+  }
+
+  .timer-btn {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+
+  .splash-card {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .splash-title {
+    font-size: 24px;
+  }
+
+  .splash-icon {
+    font-size: 50px;
+  }
 }
