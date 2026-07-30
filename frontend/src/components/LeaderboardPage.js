@@ -10,7 +10,7 @@ function LeaderboardPage() {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
 
-  // --- UPDATED: Dynamic API URL defined at component scope ---
+  // Dynamic API URL defined at component scope
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
   useEffect(() => {
@@ -20,7 +20,6 @@ function LeaderboardPage() {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        // --- UPDATED: Fetch using apiUrl ---
         const response = await axios.get(`${apiUrl}/api/records`);
         setRecords(response.data);
       } catch (error) {
@@ -30,7 +29,7 @@ function LeaderboardPage() {
 
     fetchRecords();
 
-    // --- UPDATED: Socket connection using apiUrl ---
+    // Socket connection using apiUrl for real-time auto-updates
     const socket = io(apiUrl);
 
     socket.on('leaderboardUpdated', (updatedRecords) => {
@@ -181,7 +180,7 @@ function LeaderboardPage() {
               </thead>
               <tbody>
                 {remainingRecords.map((record, index) => (
-                  <tr key={record._id}>
+                  <tr key={record._id || index}>
                     <td className="rank-col">#{index + 4}</td>
                     <td>{record.badgeName}</td>
                     <td className="ern-col">{formatEmpId(record.employeeId)}</td>

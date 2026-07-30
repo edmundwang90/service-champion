@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 8000;
 
-// 1. Middleware (Allowing port 4000 specifically)
+// 1. Middleware (CORS for Express routes)
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -35,11 +35,16 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected Successfully'))
   .catch(err => console.error('❌ MongoDB Connection Error:', err));
 
-// 4. Socket.io Setup (Allowing port 4000)
+// 4. Socket.io Setup (Updated CORS to include Vercel and local ports)
 const io = new Server(server, {
   cors: { 
-    origin: "http://localhost:4000",
-    methods: ["GET", "POST"]
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:4000',
+      'https://service-champion.vercel.app'
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -58,7 +63,7 @@ app.get('/api/records', async (req, res) => {
   }
 });
 
-// POST: Submit Score
+// POST: Submit Score & Broadcast via Socket.io
 app.post('/api/records', async (req, res) => {
   try {
     const { badgeName, employeeId, timeTaken } = req.body;
