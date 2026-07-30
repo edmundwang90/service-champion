@@ -14,9 +14,14 @@ const PORT = process.env.PORT || 8000;
 
 // 1. Middleware (Allowing port 4000 specifically)
 app.use(cors({
-  origin: "http://localhost:4000",
-  methods: ["GET", "POST"]
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:4000',
+    'https://service-champion.vercel.app'
+  ],
+  credentials: true
 }));
+
 app.use(express.json());
 
 // 2. Custom Debugging Logger 
