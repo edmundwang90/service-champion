@@ -3,11 +3,13 @@ body, html, #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  background-color: #002b2e;
   background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Fullscreen container */
@@ -16,7 +18,7 @@ body, html, #root {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   box-sizing: border-box;
   overflow: hidden;
@@ -285,7 +287,7 @@ body, html, #root {
   }
 
   .time-number {
-    font-size: 52px; /* Scaled down perfectly to fit standard iPhone screens horizontally */
+    font-size: 52px;
     letter-spacing: -1px;
   }
 
@@ -299,7 +301,7 @@ body, html, #root {
   }
 
   .button-group {
-    flex-direction: column; /* Stacks buttons vertically on narrow phones for easy thumb tapping */
+    flex-direction: column;
     gap: 10px;
   }
 

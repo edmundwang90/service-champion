@@ -26,7 +26,7 @@ app.use(express.json());
 
 // 2. Custom Debugging Logger 
 app.use((req, res, next) => {
-  console.log(`➡️  [${req.method}] ${req.url}`);
+  console.log(`➡️ [${req.method}] ${req.url}`);
   next();
 });
 
@@ -66,9 +66,11 @@ app.get('/api/records', async (req, res) => {
 // POST: Submit Score & Broadcast via Socket.io
 app.post('/api/records', async (req, res) => {
   try {
-    const { badgeName, employeeId, timeTaken } = req.body;
+    // UPDATED: Destructure galaxyId from req.body
+    const { badgeName, employeeId, galaxyId, timeTaken } = req.body;
     
-    const newRecord = new Record({ badgeName, employeeId, timeTaken });
+    // UPDATED: Pass galaxyId to the database model
+    const newRecord = new Record({ badgeName, employeeId, galaxyId, timeTaken });
     await newRecord.save();
     console.log(`💾 Saved time for ${badgeName}: ${timeTaken}ms`);
 
@@ -84,7 +86,7 @@ app.post('/api/records', async (req, res) => {
 
 // 6. 404 Catch-All
 app.use((req, res) => {
-  console.log(`⚠️  404 ERROR: Frontend tried to hit [${req.method}] ${req.url}`);
+  console.log(`⚠️ 404 ERROR: Frontend tried to hit [${req.method}] ${req.url}`);
   res.status(404).json({ error: "Route not found on backend" });
 });
 

@@ -1,15 +1,30 @@
-/* Base Container for the full page */
+/* Ensure full height reset and apply background image edge-to-edge */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #002b2e;
+  background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Base Container for the full page - Perfect Center Alignment */
 .landing-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   padding: 20px;
   box-sizing: border-box;
 }
 
-/* Glassmorphism Card */
+/* Glassmorphism Card with Equal Padding on All Sides */
 .landing-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
@@ -17,11 +32,12 @@
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  padding: 40px;
+  padding: 20px; /* FIXED: Equal padding (40px) for Top, Bottom, Left, and Right */
   width: 100%;
-  max-width: 480px;
+  max-width: 800px;
   color: #ffffff;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .form-container {
@@ -33,16 +49,17 @@
 
 /* --- Banner Image Styles --- */
 .banner-container {
-  /* Use negative margins to pull the image into the card's 40px padding */
+  /* FIXED: Adjusted negative margins to match the 40px card padding */
   margin: -40px -40px 25px -40px; 
-  width: calc(100% + 80px); /* 100% width + 40px left padding + 40px right padding */
+  width: calc(100% + 40px); /* 100% + 40px left + 40px right */
   display: block; 
 }
 
 .service-champion-img {
   width: 100%;
   height: auto;
-  border-radius: 24px 24px 0 0; /* Match the exact top curves of the landing-card */
+  max-height: 240px;
+  border-radius: 24px 24px 0 0; /* Matches top rounded corners of the card */
   object-fit: cover;
   display: block;
 }

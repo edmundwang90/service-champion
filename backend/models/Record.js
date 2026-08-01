@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
-const RecordSchema = new mongoose.Schema({
+const recordSchema = new mongoose.Schema({
   badgeName: { type: String, required: true },
   employeeId: { type: String, required: true },
-  timeTaken: { type: Number, required: true },
-  createdAt: { type: Date, default: Date.now }
+  galaxyId: { type: String, required: false }, // <-- Make sure this line exists!
+  timeTaken: { type: Number, required: true }
+}, { 
+  timestamps: true 
 });
 
-module.exports = mongoose.model('Record', RecordSchema);
+module.exports = mongoose.model('Record', recordSchema);

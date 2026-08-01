@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import serviceChampionImg from './service-champion.jpeg';
 import './LandingPage.css';
 
 function LandingPage() {
   const [badgeName, setBadgeName] = useState('');
   const [employeeId, setEmployeeId] = useState('');
+  const [galaxyId, setGalaxyId] = useState(''); // NEW STATE
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  // Dynamically set the browser tab title for the Landing Page
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
   useEffect(() => {
     document.title = 'A-Cart Challenge | Entry';
   }, []);
@@ -25,27 +28,30 @@ function LandingPage() {
   };
 
   const handleEmployeeIdChange = (e) => {
-    // Real-time check: Remove spaces or special characters immediately as they type
     let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
-    
-    // Auto-capitalize the 7th character as they type it
     if (value.length === 7) {
       value = value.slice(0, 6) + value.slice(6).toUpperCase();
     }
-    
     setEmployeeId(value);
   };
 
-  const handleSubmit = (e) => {
+  // NEW HANDLER: For Galaxy ID
+  const handleGalaxyIdChange = (e) => {
+    let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+    setGalaxyId(value);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(''); 
 
     const trimmedBadgeName = badgeName.trim();
     const trimmedEmpId = employeeId.trim();
+    const trimmedGalaxyId = galaxyId.trim();
 
-    // 1. Check if both fields are empty
-    if (!trimmedBadgeName && !trimmedEmpId) {
-      setErrorMessage('Please fill in both Badge Name and ERN.');
+    // 1. Check if fields are empty
+    if (!trimmedBadgeName && !trimmedEmpId && !trimmedGalaxyId) {
+      setErrorMessage('Please fill in Badge Name, ERN, and Galaxy ID.');
       return;
     }
 
@@ -105,11 +111,53 @@ function LandingPage() {
       return;
     }
 
-    // If all checks pass, proceed to challenge
+    // 10. Check if Galaxy ID is empty
+    if (!trimmedGalaxyId) {
+      setErrorMessage('Please enter your Galaxy ID.');
+      return;
+    }
+
+    // 11. Validate Galaxy ID length
+    if (trimmedGalaxyId.length !== 6) {
+      setErrorMessage('Galaxy ID must be exactly 6 characters long.');
+      return;
+    }
+
+    // 12. Check database for previous participation
+    const now = new Date();
+    const campaignStart = new Date(2026, 6, 31, 0, 0, 0); 
+    const campaignEnd = new Date(2026, 7, 31, 23, 59, 59);
+
+    if (now >= campaignStart && now <= campaignEnd) {
+      try {
+        const response = await axios.get(`${apiUrl}/api/records`);
+        const existingRecords = response.data;
+
+        const hasParticipated = existingRecords.some((record) => {
+          if (record.employeeId.toUpperCase() === trimmedEmpId.toUpperCase()) {
+            const recordDate = new Date(record.createdAt || record.date);
+            return recordDate >= campaignStart && recordDate <= campaignEnd;
+          }
+          return false;
+        });
+
+        if (hasParticipated) {
+          setErrorMessage('You have already participated in this challenge. Only one entry is allowed per crew member.');
+          return; 
+        }
+      } catch (error) {
+        console.error('Error verifying participation status:', error);
+        setErrorMessage('Network error while checking eligibility. Please ensure the backend is awake and try again.');
+        return; 
+      }
+    }
+
+    // Pass all 3 variables in the router state
     navigate('/challenge', { 
       state: { 
         badgeName: trimmedBadgeName, 
-        employeeId: trimmedEmpId 
+        employeeId: trimmedEmpId,
+        galaxyId: trimmedGalaxyId
       } 
     });
   };
@@ -117,10 +165,7 @@ function LandingPage() {
   return (
     <div className="landing-container">
       <div className="landing-card">
-        
         <div className="form-container">
-          
-          {/* Banner Image is now placed at the very top */}
           <div className="banner-container">
             <img 
               src={serviceChampionImg} 
@@ -142,16 +187,14 @@ function LandingPage() {
             </div>
           )}
 
-          {/* noValidate stops default HTML browser alerts */}
           <form className="landing-form" onSubmit={handleSubmit} noValidate>
-            
             <div className="form-group">
               <label className="form-label">Badge Name</label>
               <input 
                 type="text" 
                 value={badgeName} 
                 onChange={handleBadgeNameChange} 
-                placeholder="e.g. Roy" 
+                placeholder="e.g. John" 
                 className="form-input"
               />
             </div>
@@ -168,13 +211,24 @@ function LandingPage() {
               />
             </div>
 
+            {/* NEW UI: Galaxy ID Field */}
+            <div className="form-group">
+              <label className="form-label">GalaxyID</label>
+              <input 
+                type="text" 
+                value={galaxyId} 
+                onChange={handleGalaxyIdChange} 
+                placeholder="e.g. CCAAXN" 
+                maxLength={6} 
+                className="form-input"
+              />
+            </div>
+
             <button type="submit" className="btn-submit">
               Start Challenge →
             </button>
-            
           </form>
         </div>
-
       </div>
     </div>
   );
