@@ -4,6 +4,7 @@ body, html, #root {
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh; /* Safari fix: dynamically adjusts for the address/tab bar */
   background-color: #002b2e;
   background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
   background-size: cover;
@@ -18,23 +19,25 @@ body, html, #root {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-height: 100dvh; /* Safari fix */
   width: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  padding: 20px;
+  padding: 15px; /* Minimal outer padding to give the card maximum space */
   box-sizing: border-box;
+  transition: padding 0.3s ease; 
 }
 
-/* Glassmorphism Card with Equal Padding on All Sides */
+/* Glassmorphism Card - SMALLER AND COMPACT */
 .landing-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-radius: 24px;
+  border-radius: 20px; /* Slightly tighter border radius */
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  padding: 20px; /* FIXED: Equal padding (40px) for Top, Bottom, Left, and Right */
+  padding: 24px; /* Tighter internal padding */
   width: 100%;
-  max-width: 800px;
+  max-width: 600px; /* SHRUNK from 800px to make it visibly smaller */
   color: #ffffff;
   text-align: center;
   box-sizing: border-box;
@@ -49,17 +52,17 @@ body, html, #root {
 
 /* --- Banner Image Styles --- */
 .banner-container {
-  /* FIXED: Adjusted negative margins to match the 40px card padding */
-  margin: -40px -40px 25px -40px; 
-  width: calc(100% + 40px); /* 100% + 40px left + 40px right */
+  /* Match the 24px card padding */
+  margin: -24px -24px 15px -24px; 
+  width: calc(100% + 48px); 
   display: block; 
 }
 
 .service-champion-img {
   width: 100%;
   height: auto;
-  max-height: 240px;
-  border-radius: 24px 24px 0 0; /* Matches top rounded corners of the card */
+  max-height: 140px; /* Much shorter to prevent vertical clipping on landscape */
+  border-radius: 20px 20px 0 0; /* Matches card radius */
   object-fit: cover;
   display: block;
 }
@@ -67,28 +70,28 @@ body, html, #root {
 /* Header Badge styling */
 .header-badge {
   background: rgba(255, 255, 255, 0.15);
-  padding: 6px 16px;
+  padding: 4px 12px;
   border-radius: 20px;
-  font-size: 15px;
+  font-size: 12px; /* Scaled down */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .landing-title {
-  font-size: 32px;
+  font-size: 24px; /* Scaled down */
   font-weight: 700;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   letter-spacing: -0.5px;
   color: white !important;
 }
 
 .landing-subtitle {
-  font-size: 15px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.8);
-  margin: 0 0 30px 0;
+  margin: 0 0 15px 0; /* Tighter spacing */
 }
 
 .error-message {
@@ -96,40 +99,42 @@ body, html, #root {
   background: rgba(255, 77, 79, 0.2);
   border: 1px solid rgba(255, 77, 79, 0.5);
   color: #ffcccc;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 13px;
   font-weight: 500;
   box-sizing: border-box;
 }
 
 .landing-form {
   width: 100%;
+  max-width: 400px; /* Keeps inputs nicely proportioned within the smaller card */
+  margin: 0 auto;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 12px; /* Tighter spacing */
   text-align: left;
   width: 100%;
 }
 
 .form-label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
+  margin-bottom: 4px;
+  font-size: 12px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .form-input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 10px 14px; /* Slimmer inputs */
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
+  border-radius: 10px;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   box-sizing: border-box;
   outline: none;
   transition: all 0.3s ease;
@@ -148,17 +153,18 @@ body, html, #root {
 
 .btn-submit {
   width: 100%;
-  padding: 16px;
-  margin-top: 10px;
-  background-color: #005D63!important; /* Cathay Jade */
+  padding: 12px; /* Slimmer button */
+  margin-top: 5px;
+  background-color: #005D63!important;
   color: #ffffff;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent; /* Prevents grey flash on iOS tap */
 }
 
 .btn-submit:hover {
@@ -169,4 +175,91 @@ body, html, #root {
 
 .btn-submit:active {
   transform: translateY(1px);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN FOR IPHONES & IPADS
+   ========================================== */
+@media screen and (max-width: 1024px) {
+  .landing-container {
+    /* Default state: perfectly centered */
+    align-items: center; 
+    padding: 15px;
+  }
+  
+  /* MAGIC TRICK: Only apply the keyboard safe-space padding when the user is actively typing */
+  .landing-container:focus-within {
+    padding-bottom: 35dvh; 
+    align-items: flex-start;
+    padding-top: 5dvh; 
+  }
+  
+  .service-champion-img {
+    max-height: 120px; 
+  }
+}
+
+/* ==========================================
+   LANDSCAPE ORIENTATION (iPads & Tablets)
+   ========================================== */
+@media screen and (max-height: 850px) and (orientation: landscape) {
+  .landing-card {
+    padding: 18px 24px; /* Tighter vertical padding to save height */
+  }
+
+  .banner-container {
+    margin: -18px -24px 10px -24px;
+    width: calc(100% + 48px);
+  }
+
+  .service-champion-img {
+    max-height: 90px; /* Squeeze the banner aggressively to save room for the form */
+  }
+
+  .landing-title {
+    font-size: 22px;
+  }
+
+  .landing-subtitle {
+    margin-bottom: 10px;
+  }
+
+  /* Push the safe space padding higher because landscape keyboards consume over 50% of screen height */
+  .landing-container:focus-within {
+    padding-bottom: 50dvh; 
+    padding-top: 2dvh; /* Keep top padding minimal so it slides up far enough */
+  }
+}
+
+/* ==========================================
+   MOBILE SCREENS
+   ========================================== */
+/* Smaller Mobile Screens (iPhone SE, iPhone 13/14/15 standard & smaller) */
+@media screen and (max-width: 480px) {
+  .landing-card {
+    padding: 20px 16px;
+  }
+  
+  .banner-container {
+    margin: -20px -16px 15px -16px; 
+    width: calc(100% + 32px); 
+  }
+  
+  .service-champion-img {
+    max-height: 100px;
+  }
+  
+  .landing-title {
+    font-size: 22px;
+  }
+}
+
+/* Extreme Mobile Landscape (Phones turned sideways) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .service-champion-img {
+    display: none; /* Banner takes up too much room, hide completely */
+  }
+  .banner-container {
+    display: none;
+  }
 }

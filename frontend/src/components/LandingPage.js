@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import serviceChampionImg from './service-champion.jpeg';
@@ -7,9 +7,13 @@ import './LandingPage.css';
 function LandingPage() {
   const [badgeName, setBadgeName] = useState('');
   const [employeeId, setEmployeeId] = useState('');
-  const [galaxyId, setGalaxyId] = useState(''); // NEW STATE
+  const [galaxyId, setGalaxyId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  // Create references to the input fields to manage focus
+  const ernInputRef = useRef(null);
+  const galaxyIdInputRef = useRef(null);
 
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -35,11 +39,36 @@ function LandingPage() {
     setEmployeeId(value);
   };
 
-  // NEW HANDLER: For Galaxy ID
   const handleGalaxyIdChange = (e) => {
     let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
     setGalaxyId(value);
   };
+
+  // Scroll handler for iPad/Mobile keyboards
+  const handleFocus = (e) => {
+    setTimeout(() => {
+      e.target.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+    }, 300); 
+  };
+
+  // --- NEW: KeyDown handlers for auto-focusing next input ---
+  const handleBadgeNameKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Stop form from submitting
+      ernInputRef.current?.focus(); // Move to ERN
+    }
+  };
+
+  const handleErnKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Stop form from submitting
+      galaxyIdInputRef.current?.focus(); // Move to Galaxy ID
+    }
+  };
+  // ----------------------------------------------------------
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,51 +78,44 @@ function LandingPage() {
     const trimmedEmpId = employeeId.trim();
     const trimmedGalaxyId = galaxyId.trim();
 
-    // 1. Check if fields are empty
+    // Validation checks...
     if (!trimmedBadgeName && !trimmedEmpId && !trimmedGalaxyId) {
       setErrorMessage('Please fill in Badge Name, ERN, and Galaxy ID.');
       return;
     }
 
-    // 2. Check if Badge Name is empty
     if (!trimmedBadgeName) {
       setErrorMessage('Please enter your Badge Name.');
       return;
     }
 
-    // 3. Validate Badge Name length 
     if (trimmedBadgeName.length < 2 || trimmedBadgeName.length > 15) {
       setErrorMessage('Badge Name must be between 2 and 15 characters.');
       return;
     }
 
-    // 4. Validate Badge Name characters 
     const isValidName = /^[A-Za-z\s\-']+$/.test(trimmedBadgeName);
     if (!isValidName) {
       setErrorMessage('Badge Name can only contain letters, spaces, hyphens, and apostrophes.');
       return;
     }
 
-    // 5. Blocklist Check for Badge Name 
     const blockList = ['admin', 'test', 'fake', 'dummy', 'crew']; 
     if (blockList.some(word => trimmedBadgeName.toLowerCase().includes(word))) {
       setErrorMessage('Please use your real cabin crew Badge Name.');
       return;
     }
 
-    // 6. Check if ERN is empty
     if (!trimmedEmpId) {
       setErrorMessage('Please enter your ERN.');
       return;
     }
 
-    // 7. Validate ERN length
     if (trimmedEmpId.length !== 7) {
       setErrorMessage('ERN must be exactly 7 characters long.');
       return;
     }
 
-    // 8. Validate first 6 characters are numbers
     const firstSixChars = trimmedEmpId.slice(0, 6);
     const areFirstSixDigits = /^\d{6}$/.test(firstSixChars);
 
@@ -102,7 +124,6 @@ function LandingPage() {
       return;
     }
 
-    // 9. Validate 7th character is an alphabet letter
     const lastChar = trimmedEmpId.charAt(6);
     const isLastCharAlphabet = /^[A-Z]$/.test(lastChar);
 
@@ -111,19 +132,16 @@ function LandingPage() {
       return;
     }
 
-    // 10. Check if Galaxy ID is empty
     if (!trimmedGalaxyId) {
       setErrorMessage('Please enter your Galaxy ID.');
       return;
     }
 
-    // 11. Validate Galaxy ID length
     if (trimmedGalaxyId.length !== 6) {
       setErrorMessage('Galaxy ID must be exactly 6 characters long.');
       return;
     }
 
-    // 12. Check database for previous participation
     const now = new Date();
     const campaignStart = new Date(2026, 6, 31, 0, 0, 0); 
     const campaignEnd = new Date(2026, 7, 31, 23, 59, 59);
@@ -152,7 +170,6 @@ function LandingPage() {
       }
     }
 
-    // Pass all 3 variables in the router state
     navigate('/challenge', { 
       state: { 
         badgeName: trimmedBadgeName, 
@@ -193,34 +210,53 @@ function LandingPage() {
               <input 
                 type="text" 
                 value={badgeName} 
-                onChange={handleBadgeNameChange} 
+                onChange={handleBadgeNameChange}
+                onFocus={handleFocus}
+                onKeyDown={handleBadgeNameKeyDown} /* Intercept Enter key */
+                enterKeyHint="next" /* Shows "Next" on iOS keyboard */
                 placeholder="e.g. John" 
                 className="form-input"
+                autoComplete="off"
+                spellCheck="false"
               />
             </div>
 
             <div className="form-group">
               <label className="form-label">ERN</label>
               <input 
+                ref={ernInputRef} /* Attach Ref */
                 type="text" 
                 value={employeeId} 
-                onChange={handleEmployeeIdChange} 
+                onChange={handleEmployeeIdChange}
+                onFocus={handleFocus}
+                onKeyDown={handleErnKeyDown} /* Intercept Enter key */
+                enterKeyHint="next" /* Shows "Next" on iOS keyboard */
                 placeholder="e.g. 123456A" 
                 maxLength={7} 
                 className="form-input"
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck="false"
+                autoComplete="off"
               />
             </div>
 
-            {/* NEW UI: Galaxy ID Field */}
             <div className="form-group">
               <label className="form-label">GalaxyID</label>
               <input 
+                ref={galaxyIdInputRef} /* Attach Ref */
                 type="text" 
                 value={galaxyId} 
-                onChange={handleGalaxyIdChange} 
+                onChange={handleGalaxyIdChange}
+                onFocus={handleFocus}
+                enterKeyHint="go" /* Shows "Go" on iOS keyboard. Hitting enter here submits form naturally */
                 placeholder="e.g. CCAAXN" 
                 maxLength={6} 
                 className="form-input"
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck="false"
+                autoComplete="off"
               />
             </div>
 

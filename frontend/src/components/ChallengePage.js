@@ -105,7 +105,7 @@ function ChallengePage() {
       ) : (
         <div className="timer-card">
           <div className="timer-header">
-            Crew: {location.state.badgeName} ({location.state.employeeId}) | GLX: {location.state.galaxyId}
+            Crew: {location.state.badgeName} ({location.state.employeeId}) | GalaxyID: {location.state.galaxyId}
           </div>
           <div className="timer-display">
             <div className="time-block">
