@@ -73,7 +73,7 @@ function LeaderboardPage() {
   return (
     <div className="leaderboard-container">
       <div className="leaderboard-card">
-        <h2 className="leaderboard-title">Service Champion Leaderboard 🏆</h2> 
+        <h2 className="leaderboard-title">Service Champion Leaderboard 🏆 (3-7 August 2026)</h2> 
         
         <div className="podium-container">
           {podiumOrder.map((recordIndex, displayIdx) => {
@@ -107,7 +107,7 @@ function LeaderboardPage() {
 
                 <div className="podium-content">
                   <div className="podium-medal">{medals[displayIdx]}</div>
-                  <div className="podium-rank-label">{labels[displayIdx]}</div>
+                  {/* <div className="podium-rank-label">{labels[displayIdx]}</div> */}
                   {record ? (
                     <>
                       <div className="podium-name" title={record.badgeName}>{record.badgeName}</div>
