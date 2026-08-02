@@ -62,6 +62,37 @@ function LeaderboardPage() {
     return `${day}/${month}/${year}`;
   };
 
+  // --- STRICT CAMPAIGN DATE LOGIC ---
+  const getCampaignWeekRange = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 is Sunday, 1 is Monday... 6 is Saturday
+    const month = today.getMonth(); // 7 is August (0-indexed)
+    const year = today.getFullYear();
+
+    // If today is a weekend (0 or 6) OR we are not in August 2026, show N/A
+    if (dayOfWeek === 0 || dayOfWeek === 6 || month !== 7 || year !== 2026) {
+      return 'N/A';
+    }
+
+    // Otherwise, we are inside an active campaign week. Calculate the Mon-Fri range.
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - (dayOfWeek - 1)); // Snap back to the current week's Monday
+
+    const friday = new Date(monday);
+    friday.setDate(monday.getDate() + 4); // Friday is 4 days after Monday
+
+    const monMonth = monday.toLocaleString('default', { month: 'short' });
+    const friMonth = friday.toLocaleString('default', { month: 'short' });
+    const currentYear = monday.getFullYear();
+
+    // Dynamically formats string (e.g., "3-7 Aug 2026" or "31 Aug - 4 Sep 2026")
+    if (monMonth === friMonth) {
+      return `${monday.getDate()}-${friday.getDate()} ${monMonth} ${currentYear}`;
+    } else {
+      return `${monday.getDate()} ${monMonth} - ${friday.getDate()} ${friMonth} ${currentYear}`;
+    }
+  };
+
   const topTenRecords = records.slice(0, 10);
   const topThree = topTenRecords.slice(0, 3);
   const remainingRecords = topTenRecords.slice(3);
@@ -73,7 +104,9 @@ function LeaderboardPage() {
   return (
     <div className="leaderboard-container">
       <div className="leaderboard-card">
-        <h2 className="leaderboard-title">Service Champion Leaderboard 🏆 (3-7 August 2026)</h2> 
+        
+        {/* INLINE DYNAMIC DATE IN THE TITLE */}
+        <h2 className="leaderboard-title">Service Champion Leaderboard ({getCampaignWeekRange()}) 🏆</h2> 
         
         <div className="podium-container">
           {podiumOrder.map((recordIndex, displayIdx) => {

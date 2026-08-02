@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import ChallengePage from './components/ChallengePage';
 import LeaderboardPage from './components/LeaderboardPage';
+import DashboardPage from './components/DashboardPage';
 import './App.css';
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/challenge" element={<ChallengePage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+
         </Routes>
       </div>
     </Router>

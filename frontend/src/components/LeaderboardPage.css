@@ -71,10 +71,12 @@ body, html, #root {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 18px;
-  padding: 20px 15px;
+  /* INCREASED HEIGHT: Changed padding from 20px 15px to 45px 15px */
+  padding: 45px 15px; 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Added to keep content perfectly centered */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -245,10 +247,9 @@ body, html, #root {
   background: #005D63 !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 12px 16px;
-  font-size: 18px;
+  padding: 12px 16px !important;
+  font-size: 18px !important;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
@@ -331,7 +332,7 @@ body, html, #root {
 /* Tablets (iPad / iPad mini portrait) */
 @media screen and (max-width: 1024px) {
   .leaderboard-card {
-    padding: 30px 24px; /* Only resize internal padding */
+    padding: 30px 24px; 
   }
 
   .leaderboard-title {
@@ -340,7 +341,8 @@ body, html, #root {
   }
 
   .podium-box {
-    padding: 15px 10px;
+    /* INCREASED HEIGHT for tablets: Changed from 15px 10px */
+    padding: 35px 10px; 
   }
 
   .podium-name {
@@ -359,7 +361,7 @@ body, html, #root {
    ========================================== */
 @media screen and (max-height: 850px) and (orientation: landscape) {
   .leaderboard-card {
-    padding: 24px; /* Only resize internal padding */
+    padding: 24px; 
   }
 
   .leaderboard-title {
@@ -372,7 +374,8 @@ body, html, #root {
   }
 
   .podium-box {
-    padding: 12px 10px;
+    /* INCREASED HEIGHT for landscape iPads: Changed from 12px 10px */
+    padding: 25px 10px; 
   }
 
   .podium-medal {
@@ -419,7 +422,8 @@ body, html, #root {
   }
 
   .podium-box {
-    padding: 12px;
+    /* INCREASED HEIGHT for mobile phones: Changed from 12px */
+    padding: 25px 12px; 
     border-radius: 14px;
   }
 
@@ -475,7 +479,8 @@ body, html, #root {
   }
   
   .podium-box {
-    padding: 8px;
+    /* SLIGHT HEIGHT INCREASE for sideways phones: Changed from 8px */
+    padding: 14px 8px; 
   }
   
   .podium-medal {

@@ -3,7 +3,6 @@
    ========================================== */
 :root {
   --card-padding: 24px;
-  --banner-max-height: 140px;
   --title-size: 24px;
   --form-gap: 15px;
 }
@@ -72,11 +71,8 @@ body, html, #root {
 .service-champion-img {
   width: 100%;
   height: auto;
-  max-height: var(--banner-max-height); 
   border-radius: 20px 20px 0 0; /* Matches card radius */
-  object-fit: cover;
   display: block;
-  transition: max-height 0.3s ease;
 }
 
 /* Header Badge styling */
@@ -84,7 +80,7 @@ body, html, #root {
   background: rgba(255, 255, 255, 0.15);
   padding: 4px 12px;
   border-radius: 20px;
-  font-size: 12px; 
+  font-size: 15px; 
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -212,7 +208,6 @@ body, html, #root {
 @media screen and (max-height: 850px) and (orientation: landscape) {
   :root {
     --card-padding: 18px; /* Tighter padding, banner automatically adjusts */
-    --banner-max-height: 90px;
     --title-size: 22px;
   }
 
@@ -228,7 +223,6 @@ body, html, #root {
 @media screen and (max-width: 480px) {
   :root {
     --card-padding: 16px; /* Banner recalculates width naturally */
-    --banner-max-height: 100px;
     --title-size: 22px;
   }
 }
