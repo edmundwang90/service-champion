@@ -25,9 +25,9 @@ body, html, #root {
 /* Base Container for the full page - Bulletproof Centering */
 .landing-container {
   display: flex;
-  flex-direction: column; /* Required for the margin: auto trick to work vertically */
+  flex-direction: column; 
   min-height: 100vh;
-  min-height: 100dvh; /* Safari fix */
+  min-height: 100dvh; 
   width: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   padding: 15px; 
@@ -44,13 +44,13 @@ body, html, #root {
   border-radius: 20px; 
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  padding: var(--card-padding); /* Controlled by CSS variables */
+  padding: var(--card-padding); 
   width: 100%;
   max-width: 600px; 
   color: #ffffff;
   text-align: center;
   box-sizing: border-box;
-  margin: auto; /* Perfectly centers horizontally & vertically */
+  margin: auto; 
 }
 
 .form-container {
@@ -62,7 +62,6 @@ body, html, #root {
 
 /* --- Banner Image Styles --- */
 .banner-container {
-  /* Dynamically pulls the padding variable to guarantee edge-to-edge scaling */
   margin: calc(var(--card-padding) * -1) calc(var(--card-padding) * -1) var(--form-gap) calc(var(--card-padding) * -1); 
   width: calc(100% + (var(--card-padding) * 2)); 
   display: block; 
@@ -71,7 +70,7 @@ body, html, #root {
 .service-champion-img {
   width: 100%;
   height: auto;
-  border-radius: 20px 20px 0 0; /* Matches card radius */
+  border-radius: 20px 20px 0 0; 
   display: block;
 }
 
@@ -117,36 +116,40 @@ body, html, #root {
 
 .landing-form {
   width: 100%;
-  max-width: 400px; 
+  /* WIDER FORM: Increased from 400px to 500px */
+  max-width: 500px; 
   margin: 0 auto;
 }
 
 .form-group {
-  margin-bottom: 12px; 
+  margin-bottom: 15px; 
   text-align: left;
   width: 100%;
 }
 
 .form-label {
   display: block;
-  margin-bottom: 4px;
-  font-size: 12px;
+  margin-bottom: 6px;
+  font-size: 13px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .form-input {
   width: 100%;
-  padding: 10px 14px; 
+  /* TALLER INPUT: Increased padding from 10px 14px */
+  padding: 16px 18px; 
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 12px;
   color: #ffffff;
-  font-size: 14px;
+  /* LARGER TEXT: Increased from 14px to 16px */
+  font-size: 16px; 
   box-sizing: border-box;
   outline: none;
   transition: all 0.3s ease;
   font-family: inherit;
+  resize: vertical; /* Only applies if you change the HTML tag to a textarea */
 }
 
 .form-input::placeholder {
@@ -161,13 +164,14 @@ body, html, #root {
 
 .btn-submit {
   width: 100%;
-  padding: 12px; 
+  /* TALLER BUTTON: Matches the new input height */
+  padding: 16px; 
   margin-top: 5px;
-  background-color: #005D63!important;
+  background-color: #005D63 !important;
   color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -193,7 +197,6 @@ body, html, #root {
     padding: 15px;
   }
   
-  /* Focus-within for keyboard safe-space */
   @media (pointer: coarse) {
     .landing-container:focus-within {
       padding-bottom: 35dvh; 
@@ -207,7 +210,7 @@ body, html, #root {
    ========================================== */
 @media screen and (max-height: 850px) and (orientation: landscape) {
   :root {
-    --card-padding: 18px; /* Tighter padding, banner automatically adjusts */
+    --card-padding: 18px; 
     --title-size: 22px;
   }
 
@@ -222,7 +225,7 @@ body, html, #root {
    ========================================== */
 @media screen and (max-width: 480px) {
   :root {
-    --card-padding: 16px; /* Banner recalculates width naturally */
+    --card-padding: 16px; 
     --title-size: 22px;
   }
 }
@@ -235,5 +238,10 @@ body, html, #root {
   
   .landing-container {
     padding: 10px;
+  }
+  
+  .form-input, .btn-submit {
+    /* Slightly compress the larger inputs on extremely short sideways screens */
+    padding: 12px 14px; 
   }
 }

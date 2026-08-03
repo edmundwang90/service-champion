@@ -54,18 +54,18 @@ function LandingPage() {
     }, 300); 
   };
 
-  // --- NEW: KeyDown handlers for auto-focusing next input ---
+  // --- KeyDown handlers for auto-focusing next input ---
   const handleBadgeNameKeyDown = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // Stop form from submitting
-      ernInputRef.current?.focus(); // Move to ERN
+      e.preventDefault(); 
+      ernInputRef.current?.focus(); 
     }
   };
 
   const handleErnKeyDown = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // Stop form from submitting
-      galaxyIdInputRef.current?.focus(); // Move to Galaxy ID
+      e.preventDefault(); 
+      galaxyIdInputRef.current?.focus(); 
     }
   };
   // ----------------------------------------------------------
@@ -137,8 +137,9 @@ function LandingPage() {
       return;
     }
 
-    if (trimmedGalaxyId.length !== 6) {
-      setErrorMessage('Galaxy ID must be exactly 6 characters long.');
+    /* --- CHANGED: Now checks for a maximum length of 7 --- */
+    if (trimmedGalaxyId.length > 7) {
+      setErrorMessage('Galaxy ID must be a maximum of 7 characters long.');
       return;
     }
 
@@ -212,8 +213,8 @@ function LandingPage() {
                 value={badgeName} 
                 onChange={handleBadgeNameChange}
                 onFocus={handleFocus}
-                onKeyDown={handleBadgeNameKeyDown} /* Intercept Enter key */
-                enterKeyHint="next" /* Shows "Next" on iOS keyboard */
+                onKeyDown={handleBadgeNameKeyDown} 
+                enterKeyHint="next" 
                 placeholder="e.g. John" 
                 className="form-input"
                 autoComplete="off"
@@ -224,13 +225,13 @@ function LandingPage() {
             <div className="form-group">
               <label className="form-label">ERN</label>
               <input 
-                ref={ernInputRef} /* Attach Ref */
+                ref={ernInputRef} 
                 type="text" 
                 value={employeeId} 
                 onChange={handleEmployeeIdChange}
                 onFocus={handleFocus}
-                onKeyDown={handleErnKeyDown} /* Intercept Enter key */
-                enterKeyHint="next" /* Shows "Next" on iOS keyboard */
+                onKeyDown={handleErnKeyDown} 
+                enterKeyHint="next" 
                 placeholder="e.g. 123456A" 
                 maxLength={7} 
                 className="form-input"
@@ -242,16 +243,17 @@ function LandingPage() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">GalaxyID</label>
+              <label className="form-label">Cathay ID</label>
               <input 
-                ref={galaxyIdInputRef} /* Attach Ref */
+                ref={galaxyIdInputRef} 
                 type="text" 
                 value={galaxyId} 
                 onChange={handleGalaxyIdChange}
                 onFocus={handleFocus}
-                enterKeyHint="go" /* Shows "Go" on iOS keyboard. Hitting enter here submits form naturally */
+                enterKeyHint="go" 
                 placeholder="e.g. CCAAXN" 
-                maxLength={6} 
+                /* --- CHANGED: maxLength updated to 7 --- */
+                maxLength={7} 
                 className="form-input"
                 autoCapitalize="characters"
                 autoCorrect="off"

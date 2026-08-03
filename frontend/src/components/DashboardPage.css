@@ -3,10 +3,13 @@
   display: flex;
   align-items: flex-start;
   justify-content: center; 
-  min-height: 100vh;
-  min-height: 100dvh; 
+  /* FIX: Changed from min-height to strictly height */
+  height: 100vh;
+  height: 100dvh; 
   width: 100%; 
-  background-color: #002b2e; 
+  /* FIX: Prevent the main container from ever scrolling */
+  overflow: hidden; 
+  background-color: hsl(184, 100%, 9%); 
   background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
   background-size: cover;
   background-position: center;
@@ -20,7 +23,8 @@
 .dashboard-card {
   width: 100%;
   max-width: 100%; 
-  min-height: 100dvh; 
+  /* FIX: Match the parent strictly */
+  height: 100%; 
   margin: 0; 
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(16px);
@@ -31,21 +35,24 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  /* FIX: Keep inner content constrained */
+  overflow: hidden; 
 }
 
 /* Header area to hold Title and Button side-by-side on desktop */
 .dashboard-header {
   display: flex;
-  justify-content: flex-end; /* Align button to the right since title was removed */
+  justify-content: flex-end; 
   align-items: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto 30px auto;
+  flex-shrink: 0; /* FIX: Prevent header from shrinking when table gets large */
 }
 
 /* Excel Download Button */
 .btn-excel-export {
-  background-color: #217346; /* Official Excel Green */
+  background-color: #217346; 
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -87,16 +94,19 @@
   overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  flex-grow: 1; /* Allows the table area to fill the remaining screen height */
+  flex-grow: 1; 
   display: flex;
   flex-direction: column;
+  /* FIX: Required for flex-grow scrolling child to behave */
+  min-height: 0; 
 }
 
 /* Scroll wrapper allows body to scroll while locking headers */
 .dashboard-table-scroll {
   flex-grow: 1;
   overflow-y: auto;
-  max-height: calc(100dvh - 180px); /* Leaves room for header and padding */
+  /* FIX: Removed the calc() height. Flexbox handles this natively now */
+  min-height: 0; 
 }
 
 /* Table Design */
@@ -136,15 +146,15 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* --- NEW: Interactive Sortable Headers --- */
+/* Interactive Sortable Headers */
 .sortable-header {
   cursor: pointer;
-  user-select: none; /* Prevents text highlighting when rapidly clicking */
+  user-select: none; 
   transition: background-color 0.2s ease;
 }
 
 .sortable-header:hover {
-  background: #005f66 !important; /* Slightly lighter shade on hover */
+  background: #005f66 !important; 
 }
 
 /* Specific Column Adjustments */
