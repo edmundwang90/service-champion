@@ -53,6 +53,7 @@ io.on('connection', (socket) => {
 });
 
 // 5. API Routes
+
 // GET: Fetch Leaderboard
 app.get('/api/records', async (req, res) => {
   try {
@@ -66,10 +67,8 @@ app.get('/api/records', async (req, res) => {
 // POST: Submit Score & Broadcast via Socket.io
 app.post('/api/records', async (req, res) => {
   try {
-    // UPDATED: Destructure galaxyId from req.body
     const { badgeName, employeeId, galaxyId, timeTaken } = req.body;
     
-    // UPDATED: Pass galaxyId to the database model
     const newRecord = new Record({ badgeName, employeeId, galaxyId, timeTaken });
     await newRecord.save();
     console.log(`💾 Saved time for ${badgeName}: ${timeTaken}ms`);
@@ -80,6 +79,57 @@ app.post('/api/records', async (req, res) => {
     res.status(201).json(newRecord);
   } catch (err) {
     console.error("❌ Save Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT: Update an existing record
+app.put('/api/records/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { badgeName, employeeId, galaxyId, timeTaken } = req.body;
+
+    const updatedRecord = await Record.findByIdAndUpdate(
+      id,
+      { badgeName, employeeId, galaxyId, timeTaken },
+      { new: true } 
+    );
+
+    if (!updatedRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    console.log(`📝 Updated record for ${badgeName}`);
+
+    const allRecords = await Record.find().sort({ timeTaken: 1 });
+    io.emit('leaderboardUpdated', allRecords);
+
+    res.status(200).json(updatedRecord);
+  } catch (err) {
+    console.error("❌ Update Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE: Remove a record
+app.delete('/api/records/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const deletedRecord = await Record.findByIdAndDelete(id);
+    
+    if (!deletedRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    console.log(`🗑️ Deleted record with ID: ${id}`);
+
+    const allRecords = await Record.find().sort({ timeTaken: 1 });
+    io.emit('leaderboardUpdated', allRecords);
+
+    res.status(200).json({ message: 'Record deleted successfully' });
+  } catch (err) {
+    console.error("❌ Delete Error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });

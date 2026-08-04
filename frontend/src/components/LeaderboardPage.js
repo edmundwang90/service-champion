@@ -35,21 +35,33 @@ function LeaderboardPage() {
     return () => socket.disconnect();
   }, [apiUrl]);
 
+  // UPDATED: Now uses the consistent MM:SS format with padded zeros
   const formatTime = (timeInMs) => {
     const totalSeconds = Math.floor(timeInMs / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    if (minutes >= 1) {
-      const minuteText = minutes === 1 ? 'minute' : 'minutes';
-      return `${minutes} ${minuteText} and ${seconds} seconds`;
-    } 
-    return `${seconds} seconds`;
+    
+    // Pad single digits with a leading zero (e.g., 5 becomes "05")
+    const paddedMin = String(minutes).padStart(2, '0');
+    const paddedSec = String(seconds).padStart(2, '0');
+    
+    return `${paddedMin}:${paddedSec}`;
   }; 
 
   const formatEmpId = (empId) => {
     if (!empId) return '';
     if (empId.length !== 7) return empId; 
     return `${empId.substring(0, 2)}****${empId.substring(6)}`;
+  };
+
+  // NEW FUNCTION: Hide the last three characters of the Galaxy ID
+  const formatGalaxyId = (galaxyId) => {
+    if (!galaxyId) return 'N/A';
+    // If the ID is 3 characters or less, just replace it all with asterisks
+    if (galaxyId.length <= 3) return '***'; 
+    
+    // Keep everything up to the last 3 characters, then append '***'
+    return galaxyId.substring(0, galaxyId.length - 3) + '***';
   };
 
   const formatDate = (dateString) => {
@@ -164,8 +176,8 @@ function LeaderboardPage() {
                   <th>Badge Name</th>
                   {/* <th className="ern-col-header">ERN</th> */}
                   {/* NEW COLUMN */}
-                  <th>Galaxy ID</th>
-                  <th className="time-col-header">Time</th>
+                  <th>Cathay ID</th>
+                  <th className="time-col-header">Time (MM:SS)</th>
                   <th className="date-col-header">Date</th>
                 </tr>
               </thead>
@@ -175,8 +187,8 @@ function LeaderboardPage() {
                     <td className="rank-col">#{index + 4}</td>
                     <td>{record.badgeName}</td>
                     {/* <td className="ern-col">{formatEmpId(record.employeeId)}</td> */}
-                    {/* NEW DATA CELL */}
-                    <td>{record.galaxyId || 'N/A'}</td>
+                    {/* UPDATED DATA CELL USING NEW FUNCTION */}
+                    <td>{formatGalaxyId(record.galaxyId)}</td>
                     <td className="time-col">
                       {formatTime(record.timeTaken)}
                     </td>

@@ -1,16 +1,33 @@
-/* Fullscreen background base */
+/* ==========================================
+   BASE & LAYOUT (Fullscreen Glass Frame)
+   ========================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
 .dashboard-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center; 
-  /* FIX: Changed from min-height to strictly height */
   height: 100vh;
   height: 100dvh; 
-  width: 100%; 
-  /* FIX: Prevent the main container from ever scrolling */
+  width: 100vw; 
   overflow: hidden; 
   background-color: hsl(184, 100%, 9%); 
-  background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
+  background-image: linear-gradient(rgba(0, 30, 35, 0.65), rgba(0, 30, 35, 0.65)), url('./cabin.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; 
@@ -19,97 +36,161 @@
   padding: 0;
 }
 
-/* Outer layout wrapper - EDGE-TO-EDGE GLASS SCREEN */
 .dashboard-card {
   width: 100%;
-  max-width: 100%; 
-  /* FIX: Match the parent strictly */
-  height: 100%; 
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   margin: 0; 
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 50px 5vmin; 
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(30px) saturate(120%);
+  -webkit-backdrop-filter: blur(30px) saturate(120%);
+  padding: 40px 5vmin; 
   border: none;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* FIX: Keep inner content constrained */
-  overflow: hidden; 
+  overflow: hidden;
+  box-shadow: none;
+  border-radius: 0;
 }
 
-/* Header area to hold Title and Button side-by-side on desktop */
+/* ==========================================
+   HEADER, SEARCH & UNIFORM ACTION BUTTONS
+   ========================================== */
+
 .dashboard-header {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: space-between;
+  gap: 16px; 
   align-items: center;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto 30px auto;
-  flex-shrink: 0; /* FIX: Prevent header from shrinking when table gets large */
+  margin-bottom: 24px;
+  flex-shrink: 0; 
+  flex-wrap: wrap;
 }
 
-/* Excel Download Button */
-.btn-excel-export {
-  background-color: #217346; 
-  color: #ffffff;
-  border: none;
+.search-container {
+  flex: 1;
+  max-width: 420px;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  height: 48px; /* Matches uniform header button height */
+  padding: 0 18px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 12px;
-  padding: 14px 24px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
   transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* UNIFORM HEADER BUTTON SIZING */
+.btn-view-graph, .btn-add-record, .btn-excel-export {
+  width: 160px;          
+  height: 48px;         
+  padding: 0 16px;       
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 
-.btn-excel-export:hover {
-  background-color: #1e6b41;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+.btn-view-graph {
+  background: rgba(252, 225, 138, 0.15);
+  color: #fce18a;
+  border: 1px solid rgba(252, 225, 138, 0.35);
+}
+.btn-view-graph:hover {
+  background: rgba(252, 225, 138, 0.28);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
-.btn-excel-export:active {
-  transform: translateY(1px);
+.btn-add-record {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.btn-add-record:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
 }
 
+.btn-excel-export {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+}
+.btn-excel-export:hover:not(:disabled) {
+  background: rgba(74, 222, 128, 0.28);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
 .btn-excel-export:disabled {
-  background-color: #555555;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
-  opacity: 0.6;
 }
 
-/* Table container layout */
+/* ==========================================
+   TABLE & DATA GRID
+   ========================================== */
+
 .dashboard-table-container {
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto; 
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  flex-grow: 1; 
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  /* FIX: Required for flex-grow scrolling child to behave */
+  flex-grow: 1; 
   min-height: 0; 
 }
 
-/* Scroll wrapper allows body to scroll while locking headers */
 .dashboard-table-scroll {
+  max-height: none; 
+  height: 100%;     
   flex-grow: 1;
   overflow-y: auto;
-  /* FIX: Removed the calc() height. Flexbox handles this natively now */
-  min-height: 0; 
 }
 
-/* Table Design */
 .dashboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -124,93 +205,384 @@
 }
 
 .dashboard-table th {
-  background: #004b50 !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 18px 24px;
-  font-size: 16px; 
+  background: rgba(0, 77, 84, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 16px 20px;
+  font-size: 13px; 
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .dashboard-table td {
-  padding: 16px 24px; 
-  font-size: 16px; 
-  font-weight: 500;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.dashboard-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Interactive Sortable Headers */
-.sortable-header {
-  cursor: pointer;
-  user-select: none; 
+  padding: 16px 20px; 
+  font-size: 15px; 
+  font-weight: 400;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: background-color 0.2s ease;
 }
 
-.sortable-header:hover {
-  background: #005f66 !important; 
+.dashboard-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
 }
 
-/* Specific Column Adjustments */
+.dashboard-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none; 
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sortable-header:hover {
+  background: rgba(0, 98, 107, 0.95) !important; 
+  color: #ffffff;
+}
+
+.sort-icon {
+  font-size: 12px;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+.actions-col {
+  display: flex;
+  gap: 8px;
+}
+
+/* UNIFORM ROW ACTION BUTTON SIZING (Edit & Delete) */
+.btn-edit, .btn-delete {
+  width: 80px;           
+  height: 36px;          
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btn-edit {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.btn-edit:hover { 
+  background: rgba(255, 255, 255, 0.25); 
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background: rgba(255, 77, 79, 0.15);
+  color: #ff7875;
+  border: 1px solid rgba(255, 77, 79, 0.35);
+}
+.btn-delete:hover { 
+  background: rgba(255, 77, 79, 0.8); 
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .num-col-header, .num-col {
-  width: 60px;
+  width: 50px;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+}
+
+.time-col-header, .time-col {
+  text-align: center;
+  width: 140px;
+}
+
+.time-col {
+  font-variant-numeric: tabular-nums; 
+  letter-spacing: 0.8px;
+  color: #fce18a; 
+  font-weight: 600;
 }
 
 .date-col-header, .date-col {
-  width: 200px;
-  color: rgba(255, 255, 255, 0.8);
+  width: 110px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.time-of-day-col-header, .time-of-day-col {
+  width: 90px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .empty-state {
   text-align: center;
   padding: 60px !important;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
   font-style: italic;
-  font-size: 20px !important;
+  font-size: 15px !important;
 }
 
 /* ==========================================
-   RESPONSIVE DESIGN FOR IPHONES & IPADS
+   MODALS (Graph, CRUD, Delete)
    ========================================== */
 
-@media screen and (max-width: 1024px) {
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(50, 55, 60, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.modal-content {
+  background: rgba(60, 65, 70, 0.35);
+  backdrop-filter: blur(25px) saturate(120%);
+  -webkit-backdrop-filter: blur(25px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 35px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 420px;
+  color: white;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Wider custom width for the graph modal overlay */
+.graph-modal-content {
+  max-width: 750px !important;
+  width: 90% !important;
+}
+
+.graph-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.graph-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.graph-close-btn:hover {
+  background: rgba(255, 77, 79, 0.8);
+  border-color: rgba(255, 77, 79, 0.8);
+}
+
+.modal-title {
+  margin: 0 0 25px 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.error-message {
+  background: rgba(255, 77, 79, 0.2);
+  border: 1px solid rgba(255, 77, 79, 0.4);
+  color: #ff7875;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.modal-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.modal-group input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.modal-group input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* UNIFORM OVERLAY MODAL ACTION BUTTON SIZING (Cancel, Save, Delete Confirm) */
+.btn-cancel, .btn-save, .btn-delete-confirm {
+  width: 130px;           /* Forces identical fixed width for modal buttons */
+  height: 44px;          /* Forces identical fixed height */
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btn-cancel {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+}
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.btn-save {
+  border: none;
+  background: linear-gradient(135deg, rgba(0, 143, 153, 0.8) 0%, rgba(0, 108, 115, 0.8) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 120, 128, 0.3);
+}
+.btn-save:hover {
+  background: linear-gradient(135deg, rgba(0, 164, 176, 0.9) 0%, rgba(0, 127, 135, 0.9) 100%);
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   DELETE CONFIRMATION MODAL SPECIFICS
+   ========================================== */
+
+.modal-content-center {
+  text-align: center;
+  padding: 40px 30px;
+}
+
+.modal-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.modal-actions-center {
+  justify-content: center;
+  gap: 16px;
+}
+
+.btn-delete-confirm {
+  border: none;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.85) 0%, rgba(217, 54, 62, 0.85) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(217, 54, 62, 0.3);
+}
+.btn-delete-confirm:hover {
+  background: linear-gradient(135deg, rgba(255, 120, 117, 0.95) 0%, rgba(255, 77, 79, 0.95) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 77, 79, 0.4);
+}
+
+.btn-save:active, .btn-cancel:active, .btn-delete-confirm:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px 12px;
+  }
   .dashboard-card {
-    padding: 40px 24px;
+    padding: 24px 16px;
+    border-radius: 20px;
   }
   .dashboard-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: stretch;
+  }
+  .search-container {
+    max-width: 100%;
+  }
+  .header-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-view-graph, .btn-add-record, .btn-excel-export {
+    width: 100%; 
+  }
+  .modal-actions, .modal-actions-center {
+    flex-direction: column;
+  }
+  .btn-cancel, .btn-save, .btn-delete-confirm {
+    width: 100%;
   }
   .dashboard-table th, 
   .dashboard-table td {
-    padding: 14px 18px;
-    font-size: 15px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .dashboard-card {
-    padding: 30px 16px;
-  }
-  .btn-excel-export {
-    width: 100%;
-    justify-content: center;
-  }
-  .dashboard-table th {
     padding: 12px 10px;
     font-size: 13px;
-  }
-  .dashboard-table td {
-    padding: 12px 10px;
-    font-size: 14px;
   }
 }
