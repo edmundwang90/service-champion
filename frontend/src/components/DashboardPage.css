@@ -110,7 +110,7 @@
 }
 
 /* UNIFORM HEADER BUTTON SIZING */
-.btn-view-graph, .btn-add-record, .btn-excel-export {
+.btn-view-graph, .btn-add-record, .btn-excel-export, .btn-logout {
   width: 160px;          
   height: 48px;         
   padding: 0 16px;       
@@ -118,7 +118,7 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -165,6 +165,40 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: not-allowed;
   transform: none;
+}
+
+/* ==========================================
+   BEAUTIFIED LOGOUT BUTTON
+   ========================================== */
+.btn-logout {
+  width: 120px; /* Slightly narrower than the others */
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.1) 0%, rgba(217, 54, 62, 0.05) 100%);
+  color: #ff7875;
+  border: 1px solid rgba(255, 77, 79, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.btn-logout::before {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+  margin-right: 2px;
+}
+
+.btn-logout:hover {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.85) 0%, rgba(217, 54, 62, 0.95) 100%);
+  color: #ffffff;
+  border-color: rgba(255, 77, 79, 0.8);
+  box-shadow: 0 8px 25px rgba(255, 77, 79, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-logout:hover::before {
+  transform: translateX(-4px); /* Slides the door left on hover */
+}
+
+.btn-logout:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 10px rgba(255, 77, 79, 0.2);
 }
 
 /* ==========================================
@@ -571,7 +605,7 @@
     flex-direction: column;
     gap: 10px;
   }
-  .btn-view-graph, .btn-add-record, .btn-excel-export {
+  .btn-view-graph, .btn-add-record, .btn-excel-export, .btn-logout {
     width: 100%; 
   }
   .modal-actions, .modal-actions-center {
@@ -584,5 +618,68 @@
   .dashboard-table td {
     padding: 12px 10px;
     font-size: 13px;
+  }
+}
+
+/* ==========================================
+   CHECKBOX & MULTIPLE DELETE STYLES
+   ========================================== */
+.checkbox-col-header, .checkbox-col {
+  width: 44px;
+  text-align: center;
+  padding: 0 10px !important;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #ff4d4f; /* Matches your danger theme */
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox:hover {
+  transform: scale(1.1);
+}
+
+.btn-batch-delete {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.85) 0%, rgba(217, 54, 62, 0.95) 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 77, 79, 0.8);
+  width: auto; /* Allow the button to size based on the text (e.g. Delete Selected (5)) */
+  min-width: 160px;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(217, 54, 62, 0.3);
+  animation: fadeIn 0.3s ease; /* Smooth pop-in when rows are checked */
+}
+
+.btn-batch-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 77, 79, 0.4);
+}
+
+.btn-batch-delete:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 10px rgba(255, 77, 79, 0.2);
+}
+
+/* Ensure the button takes full width on mobile */
+@media screen and (max-width: 768px) {
+  .btn-batch-delete {
+    width: 100%;
   }
 }

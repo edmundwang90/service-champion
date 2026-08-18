@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import { io } from 'socket.io-client';
@@ -14,10 +15,17 @@ import {
 import './DashboardPage.css';
 
 function DashboardPage() {
+  const navigate = useNavigate();
+
+  // Dashboard Data State
   const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'descending' });
   const [searchQuery, setSearchQuery] = useState(''); 
+
+  // --- NEW: Multiple Selection State ---
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [isBatchDeleteModalOpen, setIsBatchDeleteModalOpen] = useState(false);
 
   // Graph Modal Overlay State
   const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
@@ -44,7 +52,6 @@ function DashboardPage() {
     fetchRecords();
 
     const socket = io(apiUrl);
-
     socket.on('leaderboardUpdated', (updatedRecords) => {
       setRecords(updatedRecords);
     });
@@ -63,8 +70,46 @@ function DashboardPage() {
     }
   };
 
-  // --- CRUD OPERATIONS ---
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_authenticated');
+    navigate('/login');
+  };
 
+  // --- MULTIPLE SELECTION HANDLERS ---
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      // Select all currently filtered/visible records
+      setSelectedIds(filteredAndSortedRecords.map(record => record._id));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
+  const handleSelectOne = (e, id) => {
+    if (e.target.checked) {
+      setSelectedIds(prev => [...prev, id]);
+    } else {
+      setSelectedIds(prev => prev.filter(item => item !== id));
+    }
+  };
+
+  const handleBatchDeleteClick = () => {
+    if (selectedIds.length > 0) setIsBatchDeleteModalOpen(true);
+  };
+
+  const handleConfirmBatchDelete = async () => {
+    try {
+      await axios.post(`${apiUrl}/api/records/batch-delete`, { ids: selectedIds });
+      fetchRecords();
+      setSelectedIds([]); // Clear selection after successful delete
+      setIsBatchDeleteModalOpen(false);
+    } catch (error) {
+      console.error("Error batch deleting records:", error);
+      alert("Failed to delete selected records.");
+    }
+  };
+
+  // --- CRUD OPERATIONS ---
   const handleOpenModal = (record = null) => {
     setErrorMessage(''); 
     if (record) {
@@ -119,47 +164,6 @@ function DashboardPage() {
       return;
     }
 
-    if (trimmedBadgeName.length < 2 || trimmedBadgeName.length > 15) {
-      setErrorMessage('Badge Name must be between 2 and 15 characters.');
-      return;
-    }
-
-    const isValidName = /^[A-Za-z\s\-']+$/.test(trimmedBadgeName);
-    if (!isValidName) {
-      setErrorMessage('Badge Name can only contain letters, spaces, hyphens, and apostrophes.');
-      return;
-    }
-
-    const blockList = ['admin', 'test', 'fake', 'dummy', 'crew']; 
-    if (blockList.some(word => trimmedBadgeName.toLowerCase().includes(word))) {
-      setErrorMessage('Please use a real cabin crew Badge Name.');
-      return;
-    }
-
-    if (trimmedEmpId.length !== 7) {
-      setErrorMessage('ERN must be exactly 7 characters long.');
-      return;
-    }
-
-    const firstSixChars = trimmedEmpId.slice(0, 6);
-    const areFirstSixDigits = /^\d{6}$/.test(firstSixChars);
-    if (!areFirstSixDigits) {
-      setErrorMessage('The first 6 characters of ERN must be numbers (e.g., 123456A).');
-      return;
-    }
-
-    const lastChar = trimmedEmpId.charAt(6);
-    const isLastCharAlphabet = /^[A-Z]$/.test(lastChar);
-    if (!isLastCharAlphabet) {
-      setErrorMessage('The last character of ERN must be a letter (e.g., 123456A).');
-      return;
-    }
-
-    if (trimmedGalaxyId.length > 7) {
-      setErrorMessage('Galaxy ID must be a maximum of 7 characters long.');
-      return;
-    }
-
     const validatedData = {
       ...formData,
       badgeName: trimmedBadgeName,
@@ -187,17 +191,13 @@ function DashboardPage() {
     setIsDeleteModalOpen(true);
   };
 
-  const handleCancelDelete = () => {
-    setIsDeleteModalOpen(false);
-    setRecordToDelete(null);
-  };
-
   const handleConfirmDelete = async () => {
     if (!recordToDelete) return;
-    
     try {
       await axios.delete(`${apiUrl}/api/records/${recordToDelete}`);
       fetchRecords(); 
+      // Remove from selected list if they deleted it individually while it was checked
+      setSelectedIds(prev => prev.filter(item => item !== recordToDelete));
       setIsDeleteModalOpen(false);
       setRecordToDelete(null);
     } catch (error) {
@@ -254,7 +254,6 @@ function DashboardPage() {
     return sortableRecords;
   }, [records, sortConfig, searchQuery]);
 
-  // --- PREPARE DATA FOR SCATTER PLOT ---
   const scatterPlotData = useMemo(() => {
     return filteredAndSortedRecords.map((record, index) => {
       const recordDate = new Date(record.updatedAt || record.createdAt || record.date);
@@ -273,33 +272,23 @@ function DashboardPage() {
     const totalSeconds = Math.floor(timeInMs / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    
-    const paddedMin = String(minutes).padStart(2, '0');
-    const paddedSec = String(seconds).padStart(2, '0');
-    
-    return `${paddedMin}:${paddedSec}`;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   }; 
 
   const getExcelDate = (dateString) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return '-';
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
   };
 
   const getExcelTime = (dateString) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return '-';
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${hours}:${minutes}`;
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
   };
 
-  // --- EXPORT TO EXCEL LOGIC ---
   const handleExportExcel = () => {
     if (filteredAndSortedRecords.length === 0) return;
 
@@ -328,7 +317,6 @@ function DashboardPage() {
       <div className="dashboard-card">
         
         <div className="dashboard-header">
-          {/* Search Bar */}
           <div className="search-container">
             <input 
               type="text" 
@@ -340,6 +328,13 @@ function DashboardPage() {
           </div>
           
           <div className="header-actions">
+            {/* NEW: Conditional Batch Delete Button */}
+            {selectedIds.length > 0 && (
+              <button className="btn-batch-delete" onClick={handleBatchDeleteClick}>
+                Delete Selected ({selectedIds.length})
+              </button>
+            )}
+            
             <button className="btn-add-record" onClick={() => handleOpenModal()}>
               Add New Record
             </button>
@@ -353,15 +348,26 @@ function DashboardPage() {
             <button className="btn-view-graph" onClick={() => setIsGraphModalOpen(true)}>
               View Graph
             </button>
+            <button className="btn-logout" onClick={handleLogout} title="Log Out">
+              Log Out
+            </button>
           </div>
         </div>
         
-        {/* Full Table View */}
         <div className="dashboard-table-container">
           <div className="dashboard-table-scroll">
             <table className="dashboard-table">
               <thead>
                 <tr>
+                  {/* NEW: Select All Checkbox Header */}
+                  <th className="checkbox-col-header">
+                    <input 
+                      type="checkbox" 
+                      className="custom-checkbox"
+                      onChange={handleSelectAll} 
+                      checked={filteredAndSortedRecords.length > 0 && selectedIds.length === filteredAndSortedRecords.length}
+                    />
+                  </th>
                   <th className="num-col-header">No.</th>
                   <th>Badge Name</th>
                   <th>ERN</th> 
@@ -390,17 +396,26 @@ function DashboardPage() {
               <tbody>
                 {isLoading ? (
                   <tr>
-                    <td colSpan="8" className="empty-state">Loading database records... ⏳</td>
+                    <td colSpan="9" className="empty-state">Loading database records... ⏳</td>
                   </tr>
                 ) : filteredAndSortedRecords.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="empty-state">
+                    <td colSpan="9" className="empty-state">
                       {searchQuery ? 'No records match your search criteria.' : 'No records found in the database.'}
                     </td>
                   </tr>
                 ) : (
                   filteredAndSortedRecords.map((record, index) => (
                     <tr key={record._id || index}>
+                      {/* NEW: Individual Row Checkbox */}
+                      <td className="checkbox-col">
+                        <input 
+                          type="checkbox" 
+                          className="custom-checkbox"
+                          checked={selectedIds.includes(record._id)}
+                          onChange={(e) => handleSelectOne(e, record._id)}
+                        />
+                      </td>
                       <td className="num-col">{index + 1}</td>
                       <td>{record.badgeName}</td>
                       <td>{record.employeeId || 'N/A'}</td> 
@@ -446,7 +461,6 @@ function DashboardPage() {
                       name="Entry" 
                       stroke="#ffffff" 
                       tick={{ fill: 'rgba(255, 255, 255, 0.8)' }}
-                      label={{ value: 'Participant Index', position: 'bottom', fill: 'rgba(255, 255, 255, 0.8)', offset: 0 }}
                     />
                     <YAxis 
                       type="number" 
@@ -455,7 +469,6 @@ function DashboardPage() {
                       unit="s" 
                       stroke="#ffffff" 
                       tick={{ fill: 'rgba(255, 255, 255, 0.8)' }}
-                      label={{ value: 'Time Taken (Seconds)', angle: -90, position: 'insideLeft', fill: 'rgba(255, 255, 255, 0.8)' }}
                     />
                     <Tooltip 
                       cursor={{ strokeDasharray: '3 3' }} 
@@ -488,13 +501,7 @@ function DashboardPage() {
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3 className="modal-title">{editingRecord ? 'Edit Record' : 'Add New Record'}</h3>
-            
-            {errorMessage && (
-              <div className="error-message">
-                {errorMessage}
-              </div>
-            )}
-
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
             <form onSubmit={handleFormSubmit} className="modal-form" noValidate>
               <div className="modal-group">
                 <label>Badge Name</label>
@@ -521,17 +528,31 @@ function DashboardPage() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
+      {/* Delete Single Record Modal */}
       {isDeleteModalOpen && (
-        <div className="modal-overlay" onClick={handleCancelDelete}>
+        <div className="modal-overlay" onClick={() => setIsDeleteModalOpen(false)}>
           <div className="modal-content modal-content-center" onClick={(e) => e.stopPropagation()}>
             <h3 className="modal-title" style={{ color: '#ff4d4f' }}>Confirm Deletion</h3>
+            <p className="modal-text">Are you sure you want to delete this record?</p>
+            <div className="modal-actions modal-actions-center">
+              <button type="button" className="btn-cancel" onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
+              <button type="button" className="btn-delete-confirm" onClick={handleConfirmDelete}>Delete Record</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* NEW: Delete Multiple Records Modal */}
+      {isBatchDeleteModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsBatchDeleteModalOpen(false)}>
+          <div className="modal-content modal-content-center" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title" style={{ color: '#ff4d4f' }}>Batch Deletion</h3>
             <p className="modal-text">
-              Are you sure you want to delete this record?
+              Are you sure you want to delete the <strong>{selectedIds.length}</strong> selected records? This cannot be undone.
             </p>
             <div className="modal-actions modal-actions-center">
-              <button type="button" className="btn-cancel" onClick={handleCancelDelete}>Cancel</button>
-              <button type="button" className="btn-delete-confirm" onClick={handleConfirmDelete}>Delete Record</button>
+              <button type="button" className="btn-cancel" onClick={() => setIsBatchDeleteModalOpen(false)}>Cancel</button>
+              <button type="button" className="btn-delete-confirm" onClick={handleConfirmBatchDelete}>Delete All Selected</button>
             </div>
           </div>
         </div>

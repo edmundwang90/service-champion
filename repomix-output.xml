@@ -1,0 +1,3638 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+backend/
+  models/
+    Record.js
+  .env
+  .gitignore
+  package.json
+  server.js
+frontend/
+  public/
+    favicon.ico
+    index.html
+    logo192.png
+    logo512.png
+    manifest.json
+    robots.txt
+  src/
+    components/
+      cabin.jpg
+      ChallengePage.css
+      ChallengePage.js
+      DashboardPage.css
+      DashboardPage.js
+      LandingPage.css
+      LandingPage.js
+      LeaderboardPage.css
+      LeaderboardPage.js
+      service-champion.jpeg
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+    logo.svg
+    reportWebVitals.js
+    setupTests.js
+  .gitignore
+  package.json
+  README.md
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="backend/.gitignore">
+
+</file>
+
+<file path="backend/package.json">
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.8.1",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
+</file>
+
+<file path="frontend/public/manifest.json">
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+</file>
+
+<file path="frontend/public/robots.txt">
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+</file>
+
+<file path="frontend/src/App.css">
+:root {
+  --primary: #0056b3;
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-main: #333333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+h1, h2 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #004494;
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.btn-stop {
+  background-color: #dc3545;
+}
+
+.btn-stop:hover {
+  background-color: #c82333;
+}
+
+.btn-submit {
+  background-color: #28a745;
+  margin-top: 20px;
+}
+
+.btn-submit:hover {
+  background-color: #218838;
+}
+
+.timer-display {
+  font-size: 48px;
+  font-weight: bold;
+  font-family: monospace;
+  margin: 30px 0;
+  color: #333;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.leaderboard-table th {
+  background-color: var(--primary);
+  color: white;
+}
+</file>
+
+<file path="frontend/src/App.test.js">
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+</file>
+
+<file path="frontend/src/index.css">
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+</file>
+
+<file path="frontend/src/index.js">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+</file>
+
+<file path="frontend/src/logo.svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3"><g fill="#61DAFB"><path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z"/><circle cx="420.9" cy="296.5" r="45.7"/><path d="M520.5 78.1z"/></g></svg>
+</file>
+
+<file path="frontend/src/reportWebVitals.js">
+const reportWebVitals = onPerfEntry => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+</file>
+
+<file path="frontend/src/setupTests.js">
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';
+</file>
+
+<file path="frontend/.gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+</file>
+
+<file path="frontend/README.md">
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+</file>
+
+<file path="backend/models/Record.js">
+const mongoose = require('mongoose');
+
+const recordSchema = new mongoose.Schema({
+  badgeName: { type: String, required: true },
+  employeeId: { type: String, required: true },
+  galaxyId: { type: String, required: false }, // <-- Make sure this line exists!
+  timeTaken: { type: Number, required: true }
+}, { 
+  timestamps: true 
+});
+
+module.exports = mongoose.model('Record', recordSchema);
+</file>
+
+<file path="frontend/public/index.html">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#002b2e" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+</file>
+
+<file path="frontend/src/components/DashboardPage.js">
+import React, { useEffect, useState, useMemo } from 'react';
+import axios from 'axios';
+import * as XLSX from 'xlsx';
+import { io } from 'socket.io-client';
+import { 
+  ResponsiveContainer, 
+  ScatterChart, 
+  Scatter, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip 
+} from 'recharts';
+import './DashboardPage.css';
+
+function DashboardPage() {
+  const [records, setRecords] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'descending' });
+  const [searchQuery, setSearchQuery] = useState(''); 
+
+  // Graph Modal Overlay State
+  const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
+
+  // CRUD State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(''); 
+  const [formData, setFormData] = useState({
+    badgeName: '',
+    employeeId: '',
+    galaxyId: '',
+    timeTaken: ''
+  });
+
+  // Delete Confirmation State
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [recordToDelete, setRecordToDelete] = useState(null);
+
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+  useEffect(() => {
+    document.title = 'Admin Dashboard';
+    fetchRecords();
+
+    const socket = io(apiUrl);
+
+    socket.on('leaderboardUpdated', (updatedRecords) => {
+      setRecords(updatedRecords);
+    });
+
+    return () => socket.disconnect();
+  }, [apiUrl]);
+
+  const fetchRecords = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/api/records`);
+      setRecords(response.data);
+    } catch (error) {
+      console.error('Error fetching records:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // --- CRUD OPERATIONS ---
+
+  const handleOpenModal = (record = null) => {
+    setErrorMessage(''); 
+    if (record) {
+      setEditingRecord(record);
+      setFormData({
+        badgeName: record.badgeName || '',
+        employeeId: record.employeeId || '',
+        galaxyId: record.galaxyId || '',
+        timeTaken: record.timeTaken || ''
+      });
+    } else {
+      setEditingRecord(null);
+      setFormData({ badgeName: '', employeeId: '', galaxyId: '', timeTaken: '' });
+    }
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingRecord(null);
+    setErrorMessage('');
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    let formattedValue = value;
+
+    if (name === 'badgeName' && value.length > 0) {
+      formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    } else if (name === 'employeeId') {
+      formattedValue = value.replace(/[^a-zA-Z0-9]/g, '');
+      if (formattedValue.length === 7) {
+        formattedValue = formattedValue.slice(0, 6) + formattedValue.slice(6).toUpperCase();
+      }
+    } else if (name === 'galaxyId') {
+      formattedValue = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+    }
+
+    setFormData({ ...formData, [name]: formattedValue });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    const trimmedBadgeName = formData.badgeName.trim();
+    const trimmedEmpId = formData.employeeId.trim();
+    const trimmedGalaxyId = formData.galaxyId.trim();
+
+    if (!trimmedBadgeName || !trimmedEmpId || !trimmedGalaxyId || !formData.timeTaken) {
+      setErrorMessage('Please fill in all fields.');
+      return;
+    }
+
+    if (trimmedBadgeName.length < 2 || trimmedBadgeName.length > 15) {
+      setErrorMessage('Badge Name must be between 2 and 15 characters.');
+      return;
+    }
+
+    const isValidName = /^[A-Za-z\s\-']+$/.test(trimmedBadgeName);
+    if (!isValidName) {
+      setErrorMessage('Badge Name can only contain letters, spaces, hyphens, and apostrophes.');
+      return;
+    }
+
+    const blockList = ['admin', 'test', 'fake', 'dummy', 'crew']; 
+    if (blockList.some(word => trimmedBadgeName.toLowerCase().includes(word))) {
+      setErrorMessage('Please use a real cabin crew Badge Name.');
+      return;
+    }
+
+    if (trimmedEmpId.length !== 7) {
+      setErrorMessage('ERN must be exactly 7 characters long.');
+      return;
+    }
+
+    const firstSixChars = trimmedEmpId.slice(0, 6);
+    const areFirstSixDigits = /^\d{6}$/.test(firstSixChars);
+    if (!areFirstSixDigits) {
+      setErrorMessage('The first 6 characters of ERN must be numbers (e.g., 123456A).');
+      return;
+    }
+
+    const lastChar = trimmedEmpId.charAt(6);
+    const isLastCharAlphabet = /^[A-Z]$/.test(lastChar);
+    if (!isLastCharAlphabet) {
+      setErrorMessage('The last character of ERN must be a letter (e.g., 123456A).');
+      return;
+    }
+
+    if (trimmedGalaxyId.length > 7) {
+      setErrorMessage('Galaxy ID must be a maximum of 7 characters long.');
+      return;
+    }
+
+    const validatedData = {
+      ...formData,
+      badgeName: trimmedBadgeName,
+      employeeId: trimmedEmpId,
+      galaxyId: trimmedGalaxyId,
+      ...(editingRecord && { updatedAt: new Date().toISOString() })
+    };
+
+    try {
+      if (editingRecord) {
+        await axios.put(`${apiUrl}/api/records/${editingRecord._id}`, validatedData);
+      } else {
+        await axios.post(`${apiUrl}/api/records`, validatedData);
+      }
+      fetchRecords(); 
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error saving record:", error);
+      setErrorMessage("Failed to save record. Check backend connection.");
+    }
+  };
+
+  const handleDeleteClick = (id) => {
+    setRecordToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteModalOpen(false);
+    setRecordToDelete(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!recordToDelete) return;
+    
+    try {
+      await axios.delete(`${apiUrl}/api/records/${recordToDelete}`);
+      fetchRecords(); 
+      setIsDeleteModalOpen(false);
+      setRecordToDelete(null);
+    } catch (error) {
+      console.error("Error deleting record:", error);
+      alert("Failed to delete record.");
+    }
+  };
+
+  // --- SORTING & FILTERING LOGIC ---
+  const requestSort = (key) => {
+    let direction = 'descending';
+    if (sortConfig.key === key && sortConfig.direction === 'descending') {
+      direction = 'ascending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const getSortIcon = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === 'ascending' ? ' ▲' : ' ▼';
+    }
+    return ' ↕';
+  };
+
+  const filteredAndSortedRecords = useMemo(() => {
+    let processedRecords = records;
+    if (searchQuery) {
+      const upperQuery = searchQuery.toUpperCase();
+      processedRecords = records.filter(record => 
+        record.badgeName?.toUpperCase().includes(upperQuery) ||
+        record.employeeId?.toUpperCase().includes(upperQuery) ||
+        record.galaxyId?.toUpperCase().includes(upperQuery)
+      );
+    }
+
+    let sortableRecords = [...processedRecords];
+    if (sortConfig !== null) {
+      sortableRecords.sort((a, b) => {
+        if (sortConfig.key === 'timeTaken') {
+          return sortConfig.direction === 'ascending' 
+            ? a.timeTaken - b.timeTaken 
+            : b.timeTaken - a.timeTaken;
+        }
+        if (sortConfig.key === 'date' || sortConfig.key === 'time' || sortConfig.key === 'timestamp') {
+          const dateA = new Date(a.updatedAt || a.createdAt || a.date).getTime();
+          const dateB = new Date(b.updatedAt || b.createdAt || b.date).getTime();
+          return sortConfig.direction === 'ascending' 
+            ? dateA - dateB 
+            : dateB - dateA;
+        }
+        return 0;
+      });
+    }
+    return sortableRecords;
+  }, [records, sortConfig, searchQuery]);
+
+  // --- PREPARE DATA FOR SCATTER PLOT ---
+  const scatterPlotData = useMemo(() => {
+    return filteredAndSortedRecords.map((record, index) => {
+      const recordDate = new Date(record.updatedAt || record.createdAt || record.date);
+      return {
+        index: index + 1,
+        timeInSeconds: Number((record.timeTaken / 1000).toFixed(2)),
+        badgeName: record.badgeName || 'Unknown',
+        employeeId: record.employeeId || 'N/A',
+        formattedDate: !isNaN(recordDate.getTime()) ? recordDate.toLocaleDateString() : 'N/A'
+      };
+    });
+  }, [filteredAndSortedRecords]);
+
+  // --- FORMATTERS ---
+  const formatTimeTaken = (timeInMs) => {
+    const totalSeconds = Math.floor(timeInMs / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
+    const paddedMin = String(minutes).padStart(2, '0');
+    const paddedSec = String(seconds).padStart(2, '0');
+    
+    return `${paddedMin}:${paddedSec}`;
+  }; 
+
+  const getExcelDate = (dateString) => {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return '-';
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const getExcelTime = (dateString) => {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return '-';
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
+  // --- EXPORT TO EXCEL LOGIC ---
+  const handleExportExcel = () => {
+    if (filteredAndSortedRecords.length === 0) return;
+
+    const excelData = filteredAndSortedRecords.map((record, index) => ({
+      'No.': index + 1,
+      'Badge Name': record.badgeName || 'N/A',
+      'ERN': record.employeeId || 'N/A', 
+      'Galaxy ID': record.galaxyId || 'N/A',
+      'Raw Time (ms)': record.timeTaken,
+      'Formatted Time': formatTimeTaken(record.timeTaken),
+      'Date': getExcelDate(record.updatedAt || record.createdAt || record.date),
+      'Time': getExcelTime(record.updatedAt || record.createdAt || record.date),
+      'Database ID': record._id
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(excelData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'All Records');
+
+    const fileName = `Campaign_Records_${new Date().toISOString().slice(0,10)}.xlsx`;
+    XLSX.writeFile(workbook, fileName);
+  };
+
+  return (
+    <div className="dashboard-container">
+      <div className="dashboard-card">
+        
+        <div className="dashboard-header">
+          {/* Search Bar */}
+          <div className="search-container">
+            <input 
+              type="text" 
+              className="search-input" 
+              placeholder="Search by Badge Name, ERN, or Cathay ID" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value.toUpperCase())}
+            />
+          </div>
+          
+          <div className="header-actions">
+            <button className="btn-add-record" onClick={() => handleOpenModal()}>
+              Add New Record
+            </button>
+            <button 
+              className="btn-excel-export" 
+              onClick={handleExportExcel}
+              disabled={filteredAndSortedRecords.length === 0 || isLoading}
+            >
+              Download Excel
+            </button>
+            <button className="btn-view-graph" onClick={() => setIsGraphModalOpen(true)}>
+              View Graph
+            </button>
+          </div>
+        </div>
+        
+        {/* Full Table View */}
+        <div className="dashboard-table-container">
+          <div className="dashboard-table-scroll">
+            <table className="dashboard-table">
+              <thead>
+                <tr>
+                  <th className="num-col-header">No.</th>
+                  <th>Badge Name</th>
+                  <th>ERN</th> 
+                  <th>Cathay ID</th>
+                  <th 
+                    className="time-col-header sortable-header" 
+                    onClick={() => requestSort('timeTaken')}
+                  >
+                    Time Taken <span className="sort-icon">{getSortIcon('timeTaken')}</span>
+                  </th>
+                  <th 
+                    className="date-col-header sortable-header"
+                    onClick={() => requestSort('date')}
+                  >
+                    Date <span className="sort-icon">{getSortIcon('date')}</span>
+                  </th>
+                  <th 
+                    className="time-of-day-col-header sortable-header"
+                    onClick={() => requestSort('time')}
+                  >
+                    Last Updated <span className="sort-icon">{getSortIcon('time')}</span>
+                  </th>
+                  <th className="actions-col-header">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {isLoading ? (
+                  <tr>
+                    <td colSpan="8" className="empty-state">Loading database records... ⏳</td>
+                  </tr>
+                ) : filteredAndSortedRecords.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="empty-state">
+                      {searchQuery ? 'No records match your search criteria.' : 'No records found in the database.'}
+                    </td>
+                  </tr>
+                ) : (
+                  filteredAndSortedRecords.map((record, index) => (
+                    <tr key={record._id || index}>
+                      <td className="num-col">{index + 1}</td>
+                      <td>{record.badgeName}</td>
+                      <td>{record.employeeId || 'N/A'}</td> 
+                      <td>{record.galaxyId || 'N/A'}</td>
+                      <td className="time-col">{formatTimeTaken(record.timeTaken)}</td>
+                      <td className="date-col">{getExcelDate(record.updatedAt || record.createdAt || record.date)}</td>
+                      <td className="time-of-day-col">{getExcelTime(record.updatedAt || record.createdAt || record.date)}</td>
+                      <td className="actions-col">
+                        <button className="btn-edit" onClick={() => handleOpenModal(record)}>Edit</button>
+                        <button className="btn-delete" onClick={() => handleDeleteClick(record._id)}>Delete</button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      {/* --- GRAPH MODAL OVERLAY --- */}
+      {isGraphModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsGraphModalOpen(false)}>
+          <div className="modal-content graph-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="graph-modal-header">
+              <h3 className="modal-title" style={{ margin: 0 }}>Performance Distribution Scatter Plot</h3>
+              <button className="graph-close-btn" onClick={() => setIsGraphModalOpen(false)}>✕</button>
+            </div>
+            
+            <div style={{ width: '100%', height: '400px', marginTop: '10px' }}>
+              {isLoading ? (
+                <div style={{ textAlign: 'center', padding: '100px 0', color: 'rgba(255, 255, 255, 0.6)' }}>Loading chart visualization...</div>
+              ) : scatterPlotData.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '100px 0', color: 'rgba(255, 255, 255, 0.6)' }}>No data available for plotting.</div>
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                    <XAxis 
+                      type="number" 
+                      dataKey="index" 
+                      name="Entry" 
+                      stroke="#ffffff" 
+                      tick={{ fill: 'rgba(255, 255, 255, 0.8)' }}
+                      label={{ value: 'Participant Index', position: 'bottom', fill: 'rgba(255, 255, 255, 0.8)', offset: 0 }}
+                    />
+                    <YAxis 
+                      type="number" 
+                      dataKey="timeInSeconds" 
+                      name="Time" 
+                      unit="s" 
+                      stroke="#ffffff" 
+                      tick={{ fill: 'rgba(255, 255, 255, 0.8)' }}
+                      label={{ value: 'Time Taken (Seconds)', angle: -90, position: 'insideLeft', fill: 'rgba(255, 255, 255, 0.8)' }}
+                    />
+                    <Tooltip 
+                      cursor={{ strokeDasharray: '3 3' }} 
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length) {
+                          const data = payload[0].payload;
+                          return (
+                            <div style={{ background: '#002b2e', border: '1px solid rgba(255, 255, 255, 0.2)', padding: '10px 14px', borderRadius: '8px', color: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+                              <p style={{ margin: '0 0 5px 0', fontWeight: 'bold', color: '#fce18a' }}>{data.badgeName}</p>
+                              <p style={{ margin: '0 0 3px 0', fontSize: '13px' }}>ERN: {data.employeeId}</p>
+                              <p style={{ margin: '0 0 3px 0', fontSize: '13px' }}>Time: {data.timeInSeconds}s</p>
+                              <p style={{ margin: '0', fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>Date: {data.formattedDate}</p>
+                            </div>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
+                    <Scatter name="Participants" data={scatterPlotData} fill="#fce18a" />
+                  </ScatterChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CRUD Modal */}
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">{editingRecord ? 'Edit Record' : 'Add New Record'}</h3>
+            
+            {errorMessage && (
+              <div className="error-message">
+                {errorMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleFormSubmit} className="modal-form" noValidate>
+              <div className="modal-group">
+                <label>Badge Name</label>
+                <input required type="text" name="badgeName" value={formData.badgeName} onChange={handleInputChange} autoComplete="off" spellCheck="false" />
+              </div>
+              <div className="modal-group">
+                <label>ERN (Employee ID)</label>
+                <input required type="text" name="employeeId" value={formData.employeeId} onChange={handleInputChange} maxLength={7} autoComplete="off" spellCheck="false" />
+              </div>
+              <div className="modal-group">
+                <label>Cathay ID</label>
+                <input required type="text" name="galaxyId" value={formData.galaxyId} onChange={handleInputChange} maxLength={7} autoComplete="off" spellCheck="false" />
+              </div>
+              <div className="modal-group">
+                <label>Time Taken (in milliseconds)</label>
+                <input required type="number" name="timeTaken" value={formData.timeTaken} onChange={handleInputChange} />
+              </div>
+              <div className="modal-actions">
+                <button type="button" className="btn-cancel" onClick={handleCloseModal}>Cancel</button>
+                <button type="submit" className="btn-save">{editingRecord ? 'Update' : 'Save'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="modal-overlay" onClick={handleCancelDelete}>
+          <div className="modal-content modal-content-center" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title" style={{ color: '#ff4d4f' }}>Confirm Deletion</h3>
+            <p className="modal-text">
+              Are you sure you want to delete this record?
+            </p>
+            <div className="modal-actions modal-actions-center">
+              <button type="button" className="btn-cancel" onClick={handleCancelDelete}>Cancel</button>
+              <button type="button" className="btn-delete-confirm" onClick={handleConfirmDelete}>Delete Record</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+export default DashboardPage;
+</file>
+
+<file path="frontend/src/App.js">
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import ChallengePage from './components/ChallengePage';
+import LeaderboardPage from './components/LeaderboardPage';
+import DashboardPage from './components/DashboardPage';
+import './App.css';
+
+function App() {
+  return (
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/challenge" element={<ChallengePage />} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+</file>
+
+<file path="frontend/src/components/ChallengePage.css">
+/* Ensure full height reset and apply background image edge-to-edge */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #002b2e;
+  background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Fullscreen container */
+.challenge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Outer layout wrapper */
+.timer-card {
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 70px 60px;
+  border-radius: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Header badge */
+.timer-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+/* Timer Display layout */
+.timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-number {
+  color: #ffffff;
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.time-colon {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 80px;
+  font-weight: 700;
+  margin-top: -30px;
+}
+
+.time-label {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.timer-btn {
+  flex: 1;
+  padding: 18px;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-pink {
+  background-color: #ffffff;
+  color: #004b50;
+}
+
+.btn-pink:hover {
+  background-color: #f0f4f4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-dark {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-dark:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.timer-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.timer-btn:active {
+  transform: translateY(1px);
+}
+
+/* --- Splash Screen Styles --- */
+.splash-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  padding: 50px 40px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.splash-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.splash-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #ffffff;
+}
+
+.splash-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 30px 0;
+}
+
+.loading-dots {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fce18a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.loading-dots span {
+  animation: blink 1.4s infinite both;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN FOR IPHONES & IPADS
+   ========================================== */
+
+/* Tablets (iPad / iPad mini portrait/landscape) */
+@media screen and (max-width: 768px) {
+  .challenge-container {
+    padding: 16px;
+  }
+
+  .timer-card {
+    padding: 40px 30px;
+    max-width: 100%;
+  }
+
+  .time-number {
+    font-size: 72px;
+  }
+
+  .time-colon {
+    font-size: 60px;
+    margin-top: -22px;
+  }
+}
+
+/* Smaller Mobile Screens (iPhone SE, iPhone 13/14/15 standard & smaller) */
+@media screen and (max-width: 480px) {
+  .challenge-container {
+    padding: 12px;
+    min-height: 100dvh;
+    align-items: center;
+  }
+
+  .timer-card {
+    padding: 30px 16px;
+    border-radius: 20px;
+  }
+
+  .timer-header {
+    margin-bottom: 20px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .timer-display {
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .time-number {
+    font-size: 52px;
+    letter-spacing: -1px;
+  }
+
+  .time-colon {
+    font-size: 44px;
+    margin-top: -16px;
+  }
+
+  .time-label {
+    font-size: 10px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .timer-btn {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+
+  .splash-card {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .splash-title {
+    font-size: 24px;
+  }
+
+  .splash-icon {
+    font-size: 50px;
+  }
+}
+</file>
+
+<file path="frontend/src/components/ChallengePage.js">
+import React, { useState, useRef, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './ChallengePage.css'; 
+
+function ChallengePage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isRunning, setIsRunning] = useState(false);
+  const [timeElapsed, setTimeElapsed] = useState(0); 
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [showSplash, setShowSplash] = useState(false);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    document.title = 'Challenge';
+  }, []);
+
+  // Security: Redirect if refreshed or accessed directly without required details
+  useEffect(() => {
+    if (!location?.state?.employeeId || !location?.state?.galaxyId) {
+      navigate('/', { replace: true });
+    }
+  }, [location, navigate]);
+
+  if (!location?.state?.employeeId || !location?.state?.galaxyId) return null; 
+
+  const handleStartStop = () => {
+    if (isRunning) {
+      clearInterval(intervalRef.current);
+      setIsRunning(false);
+      setIsCompleted(true);
+    } else {
+      setIsRunning(true);
+      setIsCompleted(false);
+      const startTime = Date.now() - timeElapsed;
+      intervalRef.current = setInterval(() => {
+        setTimeElapsed(Date.now() - startTime);
+      }, 10); 
+    }
+  };
+
+  const handleReset = () => {
+    clearInterval(intervalRef.current);
+    setIsRunning(false);
+    setIsCompleted(false);
+    setTimeElapsed(0);
+  };
+
+  const handleSubmitScore = async () => {
+    setIsSaving(true);
+    try {
+      const payload = {
+        badgeName: location.state.badgeName,
+        employeeId: location.state.employeeId,
+        galaxyId: location.state.galaxyId, 
+        timeTaken: timeElapsed
+      };
+
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      await axios.post(`${apiUrl}/api/records`, payload);
+      setShowSplash(true);
+
+    } catch (error) {
+      console.error("Submission Error Details:", error.response || error);
+      alert(`Error saving time: ${error.response?.data?.error || error.message}`);
+      setIsSaving(false);
+    }
+  };
+
+  const formatSplashTime = (timeInMs) => {
+    const totalSeconds = Math.floor(timeInMs / 1000);
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    if (mins >= 1) {
+      const minuteText = mins === 1 ? 'minute' : 'minutes';
+      return `${mins} ${minuteText} and ${secs} seconds`;
+    } 
+    return `${secs} seconds`;
+  };
+
+  const minutes = Math.floor(timeElapsed / 60000).toString().padStart(2, '0');
+  const seconds = Math.floor((timeElapsed % 60000) / 1000).toString().padStart(2, '0');
+  const centiseconds = Math.floor((timeElapsed % 1000) / 10).toString().padStart(2, '0');
+
+  return (
+    <div className="challenge-container">
+      {showSplash ? (
+        <div className="splash-card fade-in">
+          <div className="splash-icon">✅</div>
+          <h2 className="splash-title">Thank You, {location.state.badgeName}!</h2>
+          <p className="splash-subtitle">Your time has been officially recorded.</p>
+          <div className="splash-time-display" style={{ fontSize: '18px', marginBottom: '20px' }}>
+            Final Time: <span style={{ fontWeight: 'bold', color: '#fce18a' }}>{formatSplashTime(timeElapsed)}</span>
+          </div>
+          <button 
+            onClick={() => navigate('/')} 
+            className="timer-btn btn-pink"
+            style={{ marginTop: '20px', minWidth: '150px' }}
+          >
+            Start New Challenge
+          </button>
+        </div>
+      ) : (
+        <div className="timer-card">
+          <div className="timer-header">
+            Crew: {location.state.badgeName} ({location.state.employeeId}) | GalaxyID: {location.state.galaxyId}
+          </div>
+          <div className="timer-display">
+            <div className="time-block">
+              <span className="time-number">{minutes}</span>
+              <span className="time-label">Minutes</span>
+            </div>
+            <span className="time-colon">:</span>
+            <div className="time-block">
+              <span className="time-number">{seconds}</span>
+              <span className="time-label">Seconds</span>
+            </div>
+            <span className="time-colon">:</span>
+            <div className="time-block">
+              <span className="time-number">{centiseconds}</span>
+              <span className="time-label">milliseconds</span>
+            </div>
+          </div>
+
+          <div className="button-group">
+            <button 
+              onClick={handleStartStop} 
+              className="timer-btn btn-pink"
+            >
+              {isRunning ? 'Pause' : (timeElapsed === 0 ? 'Start' : 'Resume')}
+            </button>
+            
+            {/* RESET BUTTON */}
+            <button 
+              onClick={handleReset} 
+              className="timer-btn btn-dark"
+              disabled={timeElapsed === 0 && !isRunning}
+            >
+              Reset
+            </button>
+
+            <button 
+              onClick={handleSubmitScore} 
+              className="timer-btn btn-dark"
+              disabled={!isCompleted || isSaving || timeElapsed === 0}
+            >
+              {isSaving ? 'Saving...' : 'Submit'}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default ChallengePage;
+</file>
+
+<file path="frontend/src/components/DashboardPage.css">
+/* ==========================================
+   BASE & LAYOUT (Fullscreen Glass Frame)
+   ========================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.dashboard-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  height: 100vh;
+  height: 100dvh; 
+  width: 100vw; 
+  overflow: hidden; 
+  background-color: hsl(184, 100%, 9%); 
+  background-image: linear-gradient(rgba(0, 30, 35, 0.65), rgba(0, 30, 35, 0.65)), url('./cabin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.dashboard-card {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0; 
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(30px) saturate(120%);
+  -webkit-backdrop-filter: blur(30px) saturate(120%);
+  padding: 40px 5vmin; 
+  border: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* ==========================================
+   HEADER, SEARCH & UNIFORM ACTION BUTTONS
+   ========================================== */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px; 
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+  flex-shrink: 0; 
+  flex-wrap: wrap;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 420px;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  height: 48px; /* Matches uniform header button height */
+  padding: 0 18px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* UNIFORM HEADER BUTTON SIZING */
+.btn-view-graph, .btn-add-record, .btn-excel-export {
+  width: 160px;          
+  height: 48px;         
+  padding: 0 16px;       
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btn-view-graph {
+  background: rgba(252, 225, 138, 0.15);
+  color: #fce18a;
+  border: 1px solid rgba(252, 225, 138, 0.35);
+}
+.btn-view-graph:hover {
+  background: rgba(252, 225, 138, 0.28);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-add-record {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.btn-add-record:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.btn-excel-export {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+}
+.btn-excel-export:hover:not(:disabled) {
+  background: rgba(74, 222, 128, 0.28);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.btn-excel-export:disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==========================================
+   TABLE & DATA GRID
+   ========================================== */
+
+.dashboard-table-container {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+  min-height: 0; 
+}
+
+.dashboard-table-scroll {
+  max-height: none; 
+  height: 100%;     
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+  text-align: left;
+}
+
+.dashboard-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.dashboard-table th {
+  background: rgba(0, 77, 84, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 16px 20px;
+  font-size: 13px; 
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dashboard-table td {
+  padding: 16px 20px; 
+  font-size: 15px; 
+  font-weight: 400;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s ease;
+}
+
+.dashboard-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dashboard-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none; 
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sortable-header:hover {
+  background: rgba(0, 98, 107, 0.95) !important; 
+  color: #ffffff;
+}
+
+.sort-icon {
+  font-size: 12px;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+.actions-col {
+  display: flex;
+  gap: 8px;
+}
+
+/* UNIFORM ROW ACTION BUTTON SIZING (Edit & Delete) */
+.btn-edit, .btn-delete {
+  width: 80px;           
+  height: 36px;          
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btn-edit {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.btn-edit:hover { 
+  background: rgba(255, 255, 255, 0.25); 
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background: rgba(255, 77, 79, 0.15);
+  color: #ff7875;
+  border: 1px solid rgba(255, 77, 79, 0.35);
+}
+.btn-delete:hover { 
+  background: rgba(255, 77, 79, 0.8); 
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.num-col-header, .num-col {
+  width: 50px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+}
+
+.time-col-header, .time-col {
+  text-align: center;
+  width: 140px;
+}
+
+.time-col {
+  font-variant-numeric: tabular-nums; 
+  letter-spacing: 0.8px;
+  color: #fce18a; 
+  font-weight: 600;
+}
+
+.date-col-header, .date-col {
+  width: 110px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.time-of-day-col-header, .time-of-day-col {
+  width: 90px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px !important;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  font-size: 15px !important;
+}
+
+/* ==========================================
+   MODALS (Graph, CRUD, Delete)
+   ========================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(50, 55, 60, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.modal-content {
+  background: rgba(60, 65, 70, 0.35);
+  backdrop-filter: blur(25px) saturate(120%);
+  -webkit-backdrop-filter: blur(25px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 35px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 420px;
+  color: white;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Wider custom width for the graph modal overlay */
+.graph-modal-content {
+  max-width: 750px !important;
+  width: 90% !important;
+}
+
+.graph-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.graph-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.graph-close-btn:hover {
+  background: rgba(255, 77, 79, 0.8);
+  border-color: rgba(255, 77, 79, 0.8);
+}
+
+.modal-title {
+  margin: 0 0 25px 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.error-message {
+  background: rgba(255, 77, 79, 0.2);
+  border: 1px solid rgba(255, 77, 79, 0.4);
+  color: #ff7875;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.modal-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.modal-group input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.modal-group input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* UNIFORM OVERLAY MODAL ACTION BUTTON SIZING (Cancel, Save, Delete Confirm) */
+.btn-cancel, .btn-save, .btn-delete-confirm {
+  width: 130px;           /* Forces identical fixed width for modal buttons */
+  height: 44px;          /* Forces identical fixed height */
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btn-cancel {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+}
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.btn-save {
+  border: none;
+  background: linear-gradient(135deg, rgba(0, 143, 153, 0.8) 0%, rgba(0, 108, 115, 0.8) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 120, 128, 0.3);
+}
+.btn-save:hover {
+  background: linear-gradient(135deg, rgba(0, 164, 176, 0.9) 0%, rgba(0, 127, 135, 0.9) 100%);
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   DELETE CONFIRMATION MODAL SPECIFICS
+   ========================================== */
+
+.modal-content-center {
+  text-align: center;
+  padding: 40px 30px;
+}
+
+.modal-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.modal-actions-center {
+  justify-content: center;
+  gap: 16px;
+}
+
+.btn-delete-confirm {
+  border: none;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.85) 0%, rgba(217, 54, 62, 0.85) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(217, 54, 62, 0.3);
+}
+.btn-delete-confirm:hover {
+  background: linear-gradient(135deg, rgba(255, 120, 117, 0.95) 0%, rgba(255, 77, 79, 0.95) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 77, 79, 0.4);
+}
+
+.btn-save:active, .btn-cancel:active, .btn-delete-confirm:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px 12px;
+  }
+  .dashboard-card {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-container {
+    max-width: 100%;
+  }
+  .header-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-view-graph, .btn-add-record, .btn-excel-export {
+    width: 100%; 
+  }
+  .modal-actions, .modal-actions-center {
+    flex-direction: column;
+  }
+  .btn-cancel, .btn-save, .btn-delete-confirm {
+    width: 100%;
+  }
+  .dashboard-table th, 
+  .dashboard-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+}
+</file>
+
+<file path="frontend/package.json">
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:5002",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "react-scripts": "5.0.1",
+    "recharts": "^3.10.1",
+    "socket.io-client": "^4.7.0",
+    "web-vitals": "^6.0.1",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "PORT=4000 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+</file>
+
+<file path="frontend/src/components/LandingPage.js">
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import serviceChampionImg from './service-champion.jpeg';
+import './LandingPage.css';
+
+function LandingPage() {
+  const [badgeName, setBadgeName] = useState('');
+  const [employeeId, setEmployeeId] = useState('');
+  const [galaxyId, setGalaxyId] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+
+  // Create references to the input fields to manage focus
+  const ernInputRef = useRef(null);
+  const galaxyIdInputRef = useRef(null);
+
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+  useEffect(() => {
+    document.title = 'A-Cart Challenge | Entry';
+  }, []);
+
+  const handleBadgeNameChange = (e) => {
+    const value = e.target.value;
+    if (value.length > 0) {
+      const formattedName = value.charAt(0).toUpperCase() + value.slice(1);
+      setBadgeName(formattedName);
+    } else {
+      setBadgeName('');
+    }
+  };
+
+  const handleEmployeeIdChange = (e) => {
+    let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+    if (value.length === 7) {
+      value = value.slice(0, 6) + value.slice(6).toUpperCase();
+    }
+    setEmployeeId(value);
+  };
+
+  const handleGalaxyIdChange = (e) => {
+    let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+    setGalaxyId(value);
+  };
+
+  // Scroll handler for iPad/Mobile keyboards
+  const handleFocus = (e) => {
+    setTimeout(() => {
+      e.target.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+    }, 300); 
+  };
+
+  // --- KeyDown handlers for auto-focusing next input ---
+  const handleBadgeNameKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      ernInputRef.current?.focus(); 
+    }
+  };
+
+  const handleErnKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      galaxyIdInputRef.current?.focus(); 
+    }
+  };
+  // ----------------------------------------------------------
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage(''); 
+
+    const trimmedBadgeName = badgeName.trim();
+    const trimmedEmpId = employeeId.trim();
+    const trimmedGalaxyId = galaxyId.trim();
+
+    // Validation checks...
+    if (!trimmedBadgeName && !trimmedEmpId && !trimmedGalaxyId) {
+      setErrorMessage('Please fill in Badge Name, ERN, and Galaxy ID.');
+      return;
+    }
+
+    if (!trimmedBadgeName) {
+      setErrorMessage('Please enter your Badge Name.');
+      return;
+    }
+
+    if (trimmedBadgeName.length < 2 || trimmedBadgeName.length > 15) {
+      setErrorMessage('Badge Name must be between 2 and 15 characters.');
+      return;
+    }
+
+    const isValidName = /^[A-Za-z\s\-']+$/.test(trimmedBadgeName);
+    if (!isValidName) {
+      setErrorMessage('Badge Name can only contain letters, spaces, hyphens, and apostrophes.');
+      return;
+    }
+
+    const blockList = ['admin', 'test', 'fake', 'dummy', 'crew']; 
+    if (blockList.some(word => trimmedBadgeName.toLowerCase().includes(word))) {
+      setErrorMessage('Please use your real cabin crew Badge Name.');
+      return;
+    }
+
+    if (!trimmedEmpId) {
+      setErrorMessage('Please enter your ERN.');
+      return;
+    }
+
+    if (trimmedEmpId.length !== 7) {
+      setErrorMessage('ERN must be exactly 7 characters long.');
+      return;
+    }
+
+    const firstSixChars = trimmedEmpId.slice(0, 6);
+    const areFirstSixDigits = /^\d{6}$/.test(firstSixChars);
+
+    if (!areFirstSixDigits) {
+      setErrorMessage('The first 6 characters of ERN must be numbers (e.g., 123456A).');
+      return;
+    }
+
+    const lastChar = trimmedEmpId.charAt(6);
+    const isLastCharAlphabet = /^[A-Z]$/.test(lastChar);
+
+    if (!isLastCharAlphabet) {
+      setErrorMessage('The last character of ERN must be a letter (e.g., 123456A).');
+      return;
+    }
+
+    if (!trimmedGalaxyId) {
+      setErrorMessage('Please enter your Galaxy ID.');
+      return;
+    }
+
+    /* --- CHANGED: Now checks for a maximum length of 7 --- */
+    if (trimmedGalaxyId.length > 7) {
+      setErrorMessage('Galaxy ID must be a maximum of 7 characters long.');
+      return;
+    }
+
+    const now = new Date();
+    const campaignStart = new Date(2026, 6, 31, 0, 0, 0); 
+    const campaignEnd = new Date(2026, 7, 31, 23, 59, 59);
+
+    if (now >= campaignStart && now <= campaignEnd) {
+      try {
+        const response = await axios.get(`${apiUrl}/api/records`);
+        const existingRecords = response.data;
+
+        const hasParticipated = existingRecords.some((record) => {
+          if (record.employeeId.toUpperCase() === trimmedEmpId.toUpperCase()) {
+            const recordDate = new Date(record.createdAt || record.date);
+            return recordDate >= campaignStart && recordDate <= campaignEnd;
+          }
+          return false;
+        });
+
+        if (hasParticipated) {
+          setErrorMessage('You have already participated in this challenge. Only one entry is allowed per crew member.');
+          return; 
+        }
+      } catch (error) {
+        console.error('Error verifying participation status:', error);
+        setErrorMessage('Network error while checking eligibility. Please ensure the backend is awake and try again.');
+        return; 
+      }
+    }
+
+    navigate('/challenge', { 
+      state: { 
+        badgeName: trimmedBadgeName, 
+        employeeId: trimmedEmpId,
+        galaxyId: trimmedGalaxyId
+      } 
+    });
+  };
+
+  return (
+    <div className="landing-container">
+      <div className="landing-card">
+        <div className="form-container">
+          <div className="banner-container">
+            <img 
+              src={serviceChampionImg} 
+              alt="Service Champion" 
+              className="service-champion-img" 
+            />
+          </div>
+
+          <div className="header-badge">
+            Inflight Customer Service Delivery
+          </div>
+
+          <h2 className="landing-title">A-Cart Challenge 🚀</h2>
+          <p className="landing-subtitle">Enter your details to begin</p>
+
+          {errorMessage && (
+            <div className="error-message">
+              {errorMessage}
+            </div>
+          )}
+
+          <form className="landing-form" onSubmit={handleSubmit} noValidate>
+            <div className="form-group">
+              <label className="form-label">Badge Name</label>
+              <input 
+                type="text" 
+                value={badgeName} 
+                onChange={handleBadgeNameChange}
+                onFocus={handleFocus}
+                onKeyDown={handleBadgeNameKeyDown} 
+                enterKeyHint="next" 
+                placeholder="e.g. John" 
+                className="form-input"
+                autoComplete="off"
+                spellCheck="false"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">ERN</label>
+              <input 
+                ref={ernInputRef} 
+                type="text" 
+                value={employeeId} 
+                onChange={handleEmployeeIdChange}
+                onFocus={handleFocus}
+                onKeyDown={handleErnKeyDown} 
+                enterKeyHint="next" 
+                placeholder="e.g. 123456A" 
+                maxLength={7} 
+                className="form-input"
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck="false"
+                autoComplete="off"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Cathay ID</label>
+              <input 
+                ref={galaxyIdInputRef} 
+                type="text" 
+                value={galaxyId} 
+                onChange={handleGalaxyIdChange}
+                onFocus={handleFocus}
+                enterKeyHint="go" 
+                placeholder="e.g. CCAAXN" 
+                /* --- CHANGED: maxLength updated to 7 --- */
+                maxLength={7} 
+                className="form-input"
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck="false"
+                autoComplete="off"
+              />
+            </div>
+
+            <button type="submit" className="btn-submit">
+              Start Challenge →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LandingPage;
+</file>
+
+<file path="backend/server.js">
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
+require('dotenv').config();
+
+const Record = require('./models/Record');
+
+const app = express();
+const server = http.createServer(app);
+
+const PORT = process.env.PORT || 8000;
+
+// 1. Middleware (CORS for Express routes)
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:4000',
+    'https://service-champion.vercel.app'
+  ],
+  credentials: true
+}));
+
+app.use(express.json());
+
+// 2. Custom Debugging Logger 
+app.use((req, res, next) => {
+  console.log(`➡️ [${req.method}] ${req.url}`);
+  next();
+});
+
+// 3. Database Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB Connected Successfully'))
+  .catch(err => console.error('❌ MongoDB Connection Error:', err));
+
+// 4. Socket.io Setup (Updated CORS to include Vercel and local ports)
+const io = new Server(server, {
+  cors: { 
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:4000',
+      'https://service-champion.vercel.app'
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+
+io.on('connection', (socket) => {
+  console.log(`🔌 New Crew Client Connected: ${socket.id}`);
+});
+
+// 5. API Routes
+
+// GET: Fetch Leaderboard
+app.get('/api/records', async (req, res) => {
+  try {
+    const records = await Record.find().sort({ timeTaken: 1 });
+    res.status(200).json(records);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST: Submit Score & Broadcast via Socket.io
+app.post('/api/records', async (req, res) => {
+  try {
+    const { badgeName, employeeId, galaxyId, timeTaken } = req.body;
+    
+    const newRecord = new Record({ badgeName, employeeId, galaxyId, timeTaken });
+    await newRecord.save();
+    console.log(`💾 Saved time for ${badgeName}: ${timeTaken}ms`);
+
+    const updatedRecords = await Record.find().sort({ timeTaken: 1 });
+    io.emit('leaderboardUpdated', updatedRecords);
+
+    res.status(201).json(newRecord);
+  } catch (err) {
+    console.error("❌ Save Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT: Update an existing record
+app.put('/api/records/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { badgeName, employeeId, galaxyId, timeTaken } = req.body;
+
+    const updatedRecord = await Record.findByIdAndUpdate(
+      id,
+      { badgeName, employeeId, galaxyId, timeTaken },
+      { new: true } 
+    );
+
+    if (!updatedRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    console.log(`📝 Updated record for ${badgeName}`);
+
+    const allRecords = await Record.find().sort({ timeTaken: 1 });
+    io.emit('leaderboardUpdated', allRecords);
+
+    res.status(200).json(updatedRecord);
+  } catch (err) {
+    console.error("❌ Update Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE: Remove a record
+app.delete('/api/records/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const deletedRecord = await Record.findByIdAndDelete(id);
+    
+    if (!deletedRecord) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    console.log(`🗑️ Deleted record with ID: ${id}`);
+
+    const allRecords = await Record.find().sort({ timeTaken: 1 });
+    io.emit('leaderboardUpdated', allRecords);
+
+    res.status(200).json({ message: 'Record deleted successfully' });
+  } catch (err) {
+    console.error("❌ Delete Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 6. 404 Catch-All
+app.use((req, res) => {
+  console.log(`⚠️ 404 ERROR: Frontend tried to hit [${req.method}] ${req.url}`);
+  res.status(404).json({ error: "Route not found on backend" });
+});
+
+// 7. Start Server
+server.listen(PORT, () => {
+  console.log(`🚀 Backend Server running securely on http://localhost:${PORT}`);
+});
+</file>
+
+<file path="frontend/src/components/LeaderboardPage.js">
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
+import './LeaderboardPage.css';
+
+function LeaderboardPage() {
+  const [records, setRecords] = useState([]);
+  const navigate = useNavigate();
+
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+  useEffect(() => {
+    document.title = 'Leaderboard';
+  }, []);
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/records`);
+        setRecords(response.data);
+      } catch (error) {
+        console.error('Error fetching records:', error);
+      }
+    };
+
+    fetchRecords();
+
+    const socket = io(apiUrl);
+
+    socket.on('leaderboardUpdated', (updatedRecords) => {
+      setRecords(updatedRecords);
+    });
+
+    return () => socket.disconnect();
+  }, [apiUrl]);
+
+  // UPDATED: Now uses the consistent MM:SS format with padded zeros
+  const formatTime = (timeInMs) => {
+    const totalSeconds = Math.floor(timeInMs / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
+    // Pad single digits with a leading zero (e.g., 5 becomes "05")
+    const paddedMin = String(minutes).padStart(2, '0');
+    const paddedSec = String(seconds).padStart(2, '0');
+    
+    return `${paddedMin}:${paddedSec}`;
+  }; 
+
+  const formatEmpId = (empId) => {
+    if (!empId) return '';
+    if (empId.length !== 7) return empId; 
+    return `${empId.substring(0, 2)}****${empId.substring(6)}`;
+  };
+
+  // NEW FUNCTION: Hide the last three characters of the Galaxy ID
+  const formatGalaxyId = (galaxyId) => {
+    if (!galaxyId) return 'N/A';
+    // If the ID is 3 characters or less, just replace it all with asterisks
+    if (galaxyId.length <= 3) return '***'; 
+    
+    // Keep everything up to the last 3 characters, then append '***'
+    return galaxyId.substring(0, galaxyId.length - 3) + '***';
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return '-';
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  // --- STRICT CAMPAIGN DATE LOGIC ---
+  const getCampaignWeekRange = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 is Sunday, 1 is Monday... 6 is Saturday
+    const month = today.getMonth(); // 7 is August (0-indexed)
+    const year = today.getFullYear();
+
+    // If today is a weekend (0 or 6) OR we are not in August 2026, show N/A
+    if (dayOfWeek === 0 || dayOfWeek === 6 || month !== 7 || year !== 2026) {
+      return 'N/A';
+    }
+
+    // Otherwise, we are inside an active campaign week. Calculate the Mon-Fri range.
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - (dayOfWeek - 1)); // Snap back to the current week's Monday
+
+    const friday = new Date(monday);
+    friday.setDate(monday.getDate() + 4); // Friday is 4 days after Monday
+
+    const monMonth = monday.toLocaleString('default', { month: 'short' });
+    const friMonth = friday.toLocaleString('default', { month: 'short' });
+    const currentYear = monday.getFullYear();
+
+    // Dynamically formats string (e.g., "3-7 Aug 2026" or "31 Aug - 4 Sep 2026")
+    if (monMonth === friMonth) {
+      return `${monday.getDate()}-${friday.getDate()} ${monMonth} ${currentYear}`;
+    } else {
+      return `${monday.getDate()} ${monMonth} - ${friday.getDate()} ${friMonth} ${currentYear}`;
+    }
+  };
+
+  const topTenRecords = records.slice(0, 10);
+  const topThree = topTenRecords.slice(0, 3);
+  const remainingRecords = topTenRecords.slice(3);
+
+  const podiumOrder = [1, 0, 2];
+  const medals = ['🥈', '🥇', '🥉'];
+  const labels = ['2nd Place', '1st Place', '3rd Place'];
+
+  return (
+    <div className="leaderboard-container">
+      <div className="leaderboard-card">
+        
+        {/* INLINE DYNAMIC DATE IN THE TITLE */}
+        <h2 className="leaderboard-title">Service Champion Leaderboard ({getCampaignWeekRange()}) 🏆</h2> 
+        
+        <div className="podium-container">
+          {podiumOrder.map((recordIndex, displayIdx) => {
+            const record = topThree[recordIndex];
+            const actualRank = recordIndex + 1;
+            return (
+              <div key={recordIndex} className={`podium-box rank-${actualRank}`}>
+                {actualRank === 1 && record && (
+                  <div className="confetti-container">
+                    {[...Array(20)].map((_, i) => {
+                      const colors = ['#fce18a', '#ff726d', '#b48def', '#f4306d', '#005D63'];
+                      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                      const randomLeft = Math.floor(Math.random() * 100) + '%';
+                      const randomDelay = Math.random() * 3 + 's';
+                      const randomDuration = Math.random() * 2 + 2 + 's';
+                      return (
+                        <div 
+                          key={i} 
+                          className="confetti-piece" 
+                          style={{
+                            backgroundColor: randomColor,
+                            left: randomLeft,
+                            animationDelay: randomDelay,
+                            animationDuration: randomDuration
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+
+                <div className="podium-content">
+                  <div className="podium-medal">{medals[displayIdx]}</div>
+                  {/* <div className="podium-rank-label">{labels[displayIdx]}</div> */}
+                  {record ? (
+                    <>
+                      <div className="podium-name" title={record.badgeName}>{record.badgeName}</div>
+                      <div className="podium-time">{formatTime(record.timeTaken)}</div>
+                    </>
+                  ) : (
+                    <div className="podium-empty">Available</div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="table-container">
+          <div className="table-scroll-wrapper">
+            <table className="leaderboard-table">
+              <thead>
+                <tr>
+                  <th className="rank-col-header">Rank</th>
+                  <th>Badge Name</th>
+                  {/* <th className="ern-col-header">ERN</th> */}
+                  {/* NEW COLUMN */}
+                  <th>Cathay ID</th>
+                  <th className="time-col-header">Time (MM:SS)</th>
+                  <th className="date-col-header">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {remainingRecords.map((record, index) => (
+                  <tr key={record._id || index}>
+                    <td className="rank-col">#{index + 4}</td>
+                    <td>{record.badgeName}</td>
+                    {/* <td className="ern-col">{formatEmpId(record.employeeId)}</td> */}
+                    {/* UPDATED DATA CELL USING NEW FUNCTION */}
+                    <td>{formatGalaxyId(record.galaxyId)}</td>
+                    <td className="time-col">
+                      {formatTime(record.timeTaken)}
+                    </td>
+                    <td className="date-col">{formatDate(record.createdAt || record.date)}</td>
+                  </tr>
+                ))}
+                {topTenRecords.length === 0 && (
+                  <tr>
+                    {/* UPDATED: colSpan is now 6 to span all columns */}
+                    <td colSpan="6" className="empty-state">No records yet. Be the first to set the bar! 🚀</td>
+                  </tr>
+                )}
+                {topTenRecords.length > 0 && remainingRecords.length === 0 && (
+                  <tr>
+                    {/* UPDATED: colSpan is now 6 */}
+                    <td colSpan="6" className="empty-state">All current leaders are shown in the podium above! 🌟</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LeaderboardPage;
+</file>
+
+<file path="frontend/src/components/LandingPage.css">
+/* ==========================================
+   CSS VARIABLES FOR FLAWLESS SCALING
+   ========================================== */
+:root {
+  --card-padding: 24px;
+  --title-size: 24px;
+  --form-gap: 15px;
+}
+
+/* Ensure full height reset and apply background image edge-to-edge */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Safari fix: dynamically adjusts for the address/tab bar */
+  background-color: #002b2e;
+  background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Base Container for the full page - Bulletproof Centering */
+.landing-container {
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh;
+  min-height: 100dvh; 
+  width: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 15px; 
+  box-sizing: border-box;
+  transition: padding 0.3s ease; 
+  overflow-y: auto; 
+}
+
+/* Glassmorphism Card - SMALLER AND COMPACT */
+.landing-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  padding: var(--card-padding); 
+  width: 100%;
+  max-width: 600px; 
+  color: #ffffff;
+  text-align: center;
+  box-sizing: border-box;
+  margin: auto; 
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* --- Banner Image Styles --- */
+.banner-container {
+  margin: calc(var(--card-padding) * -1) calc(var(--card-padding) * -1) var(--form-gap) calc(var(--card-padding) * -1); 
+  width: calc(100% + (var(--card-padding) * 2)); 
+  display: block; 
+}
+
+.service-champion-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px 20px 0 0; 
+  display: block;
+}
+
+/* Header Badge styling */
+.header-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 15px; 
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.landing-title {
+  font-size: var(--title-size); 
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.5px;
+  color: white !important;
+}
+
+.landing-subtitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 15px 0; 
+}
+
+.error-message {
+  width: 100%;
+  background: rgba(255, 77, 79, 0.2);
+  border: 1px solid rgba(255, 77, 79, 0.5);
+  color: #ffcccc;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.landing-form {
+  width: 100%;
+  /* WIDER FORM: Increased from 400px to 500px */
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 15px; 
+  text-align: left;
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.form-input {
+  width: 100%;
+  /* TALLER INPUT: Increased padding from 10px 14px */
+  padding: 16px 18px; 
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  /* LARGER TEXT: Increased from 14px to 16px */
+  font-size: 16px; 
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  resize: vertical; /* Only applies if you change the HTML tag to a textarea */
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+}
+
+.btn-submit {
+  width: 100%;
+  /* TALLER BUTTON: Matches the new input height */
+  padding: 16px; 
+  margin-top: 5px;
+  background-color: #005D63 !important;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent; 
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  background-color: #f0f4f4;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN FOR IPHONES & IPADS
+   ========================================== */
+@media screen and (max-width: 1024px) {
+  .landing-container {
+    padding: 15px;
+  }
+  
+  @media (pointer: coarse) {
+    .landing-container:focus-within {
+      padding-bottom: 35dvh; 
+      padding-top: 5dvh; 
+    }
+  }
+}
+
+/* ==========================================
+   LANDSCAPE ORIENTATION (iPads & Tablets)
+   ========================================== */
+@media screen and (max-height: 850px) and (orientation: landscape) {
+  :root {
+    --card-padding: 18px; 
+    --title-size: 22px;
+  }
+
+  .landing-container:focus-within {
+    padding-bottom: 50dvh; 
+    padding-top: 2dvh; 
+  }
+}
+
+/* ==========================================
+   MOBILE SCREENS
+   ========================================== */
+@media screen and (max-width: 480px) {
+  :root {
+    --card-padding: 16px; 
+    --title-size: 22px;
+  }
+}
+
+/* Extreme Mobile Landscape (Phones turned sideways) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .service-champion-img, .banner-container {
+    display: none; 
+  }
+  
+  .landing-container {
+    padding: 10px;
+  }
+  
+  .form-input, .btn-submit {
+    /* Slightly compress the larger inputs on extremely short sideways screens */
+    padding: 12px 14px; 
+  }
+}
+</file>
+
+<file path="frontend/src/components/LeaderboardPage.css">
+/* Ensure full height reset and apply background image edge-to-edge */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Safari fix: dynamically adjusts for the address/tab bar */
+  background-color: #002b2e; 
+  background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+}
+
+/* Fullscreen container - PERFECT CENTERING APPLIED HERE */
+.leaderboard-container {
+  display: flex;
+  align-items: center;       /* Centers vertically */
+  justify-content: center;   /* Centers horizontally */
+  min-height: 100vh;
+  min-height: 100dvh; 
+  width: 100%; 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  overflow-y: auto; 
+  padding: 24px; /* Uniform breathing room around the card */
+}
+
+/* Outer layout wrapper */
+.leaderboard-card {
+  width: 100%;
+  max-width: 1300px; 
+  margin: auto; /* Magic Flexbox fallback: prevents top-clipping on tiny screens if the card overflows */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 35px 40px; 
+  border-radius: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Leaderboard Title */
+.leaderboard-title {
+  color: #ffffff;
+  font-size: 30px !important;
+  font-weight: 700;
+  /* INCREASED MARGIN-BOTTOM from 25px to 45px for more padding above podiums */
+  margin: 0 0 45px 0;
+}
+
+/* Podium Container (Top 3 Side-by-Side Boxes) */
+.podium-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.podium-box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  /* INCREASED HEIGHT: Boxes are much taller */
+  padding: 75px 15px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Added to keep content perfectly centered */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Elevate the text content above the confetti */
+.podium-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Pulsating Keyframes for 1st Place Box */
+@keyframes pulseGlow {
+  0% {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 100%);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.35);
+  }
+  100% {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Pulsating Effect for 1st Place */
+.podium-box.rank-1 {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+  transform: translateY(-4px);
+}
+
+.podium-box.rank-1:hover {
+  transform: translateY(-6px);
+}
+
+.podium-box:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Confetti Container & Pieces */
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fall linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(180px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.podium-medal {
+  /* INCREASED SIZE */
+  font-size: 75px;
+  margin-bottom: 10px;
+}
+
+.podium-rank-label {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.podium-box.rank-1 .podium-rank-label {
+  color: #ffffff;
+}
+
+.podium-name {
+  color: #ffffff;
+  /* INCREASED SIZE */
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.podium-ern {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-family: monospace;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+.podium-date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.podium-time {
+  color: #fce18a; /* UPDATED to match table's yellow accent */
+  /* INCREASED SIZE slightly to match bigger names */
+  font-size: 16px;
+  font-weight: 700; /* Bumped to 700 to make it pop like the table time */
+}
+
+.podium-empty {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 15px;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* Table container layout */
+.table-container {
+  width: 100%;
+  margin-bottom: 25px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-scroll-wrapper {
+  height: auto;
+  width: 100%;
+}
+
+/* Table Design */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+  text-align: left;
+}
+
+.leaderboard-table th {
+  background: #005D63 !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 12px 13px !important;
+  font-size: 18px !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.leaderboard-table td {
+  padding: 16px 18px; /* Increased padding for breathability */
+  font-size: 17px;    /* Increased size for readability */
+  font-weight: 600;   /* Bolder text */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12); /* Brighter divider lines */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Helps text pop off background */
+}
+
+/* Zebra striping for better row tracking */
+.leaderboard-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.leaderboard-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.15); /* Brighter hover */
+  transition: background 0.2s ease;
+}
+
+/* Specific Column Adjustments */
+.rank-col-header, .rank-col {
+  width: 60px;
+  text-align: center;
+}
+
+.rank-col {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.ern-col-header {
+  width: 110px;
+}
+
+.ern-col {
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 1px;
+}
+
+.date-col-header, .date-col {
+  width: 110px;
+  color: rgba(255, 255, 255, 0.95); /* Increased opacity */
+}
+
+.time-col-header, .time-col {
+  text-align: right;
+}
+
+.time-col {
+  color: #fce18a; /* Soft yellow accent color to make times pop */
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px !important;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* White Action Button */
+.btn-white {
+  width: 100%;
+  max-width: 320px;
+  padding: 16px;
+  border: none;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #004b50;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-white:hover {
+  background-color: #f0f4f4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-white:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN FOR IPHONES & IPADS
+   ========================================== */
+
+/* Tablets (iPad / iPad mini portrait) */
+@media screen and (max-width: 1024px) {
+  .leaderboard-card {
+    padding: 30px 24px; 
+  }
+
+  .leaderboard-title {
+    font-size: 28px;
+    margin-bottom: 35px; /* Increased padding */
+  }
+
+  .podium-box {
+    /* INCREASED HEIGHT for tablets */
+    padding: 55px 10px; 
+  }
+
+  .podium-medal {
+    /* Bigger medal for tablets */
+    font-size: 60px;
+  }
+
+  .podium-name {
+    /* INCREASED font */
+    font-size: 26px;
+  }
+
+  .leaderboard-table th, 
+  .leaderboard-table td {
+    padding: 14px 14px;
+    font-size: 15px; /* Bumped up for tablet readability */
+  }
+}
+
+/* ==========================================
+   LANDSCAPE ORIENTATION (iPads & Tablets)
+   ========================================== */
+@media screen and (max-height: 850px) and (orientation: landscape) {
+  .leaderboard-card {
+    padding: 24px; 
+  }
+
+  .leaderboard-title {
+    font-size: 24px;
+    margin-bottom: 25px; /* Increased padding */
+  }
+
+  .podium-container {
+    margin-bottom: 15px;
+  }
+
+  .podium-box {
+    /* INCREASED HEIGHT for landscape iPads */
+    padding: 40px 10px; 
+  }
+
+  .podium-medal {
+    font-size: 45px;
+    margin-bottom: 6px;
+  }
+
+  .podium-name {
+    font-size: 22px;
+  }
+
+  .table-container {
+    margin-bottom: 15px;
+  }
+
+  /* Compress the table rows to fit more data on screen */
+  .leaderboard-table th, 
+  .leaderboard-table td {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* ==========================================
+   MOBILE SCREENS
+   ========================================== */
+/* Smaller Mobile Screens */
+@media screen and (max-width: 480px) {
+  .leaderboard-card {
+    padding: 20px 12px;
+    border-radius: 20px;
+  }
+
+  .leaderboard-title {
+    font-size: 22px;
+    margin-bottom: 25px; /* Increased padding */
+  }
+
+  /* Stack podium boxes vertically on narrow phones */
+  .podium-container {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .podium-box {
+    /* INCREASED HEIGHT for mobile phones */
+    padding: 35px 12px; 
+    border-radius: 14px;
+  }
+
+  .podium-box.rank-1 {
+    transform: none; 
+  }
+
+  .podium-medal {
+    font-size: 45px;
+    margin-bottom: 4px;
+  }
+
+  .podium-rank-label {
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+
+  .podium-name {
+    font-size: 24px;
+  }
+
+  .leaderboard-table th {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+
+  .leaderboard-table td {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  .time-col {
+    font-size: 14px; /* Ensure mobile times stay large */
+  }
+
+  .date-col-header, .date-col {
+    display: none; 
+  }
+
+  .rank-col-header, .rank-col {
+    width: 40px;
+  }
+
+  .ern-col-header, .ern-col {
+    width: 80px;
+  }
+}
+
+/* Extreme Mobile Landscape (Phones turned sideways) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .leaderboard-title {
+    font-size: 20px;
+  }
+  
+  .podium-container {
+    gap: 8px;
+  }
+  
+  .podium-box {
+    /* HEIGHT INCREASE for sideways phones */
+    padding: 25px 8px; 
+  }
+  
+  .podium-medal {
+    font-size: 32px;
+  }
+
+  .podium-name {
+    font-size: 18px;
+  }
+  
+  .leaderboard-table th, 
+  .leaderboard-table td {
+    padding: 6px 8px;
+  }
+}
+</file>
+
+</files>
