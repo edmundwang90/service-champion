@@ -188,6 +188,11 @@ app.post('/api/records/batch-delete', async (req, res) => {
   }
 });
 
+// Health Check Route for the Root URL
+app.get('/', (req, res) => {
+  res.status(200).json({ message: "Service Champion API is running successfully." });
+});
+
 // 6. 404 Catch-All
 app.use((req, res) => {
   console.log(`⚠️ 404 ERROR: Frontend tried to hit [${req.method}] ${req.url}`);

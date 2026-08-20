@@ -4,7 +4,7 @@ body, html, #root {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  min-height: 100dvh; /* Safari fix: dynamically adjusts for the address/tab bar */
+  min-height: 100dvh; 
   background-color: #002b2e; 
   background-image: linear-gradient(rgba(0, 93, 99, 0.4), rgba(0, 93, 99, 0.4)), url('./cabin.jpg');
   background-size: cover;
@@ -13,25 +13,23 @@ body, html, #root {
   background-attachment: fixed; 
 }
 
-/* Fullscreen container - PERFECT CENTERING APPLIED HERE */
 .leaderboard-container {
   display: flex;
-  align-items: center;       /* Centers vertically */
-  justify-content: center;   /* Centers horizontally */
+  align-items: center;       
+  justify-content: center;   
   min-height: 100vh;
   min-height: 100dvh; 
   width: 100%; 
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   box-sizing: border-box;
   overflow-y: auto; 
-  padding: 24px; /* Uniform breathing room around the card */
+  padding: 24px; 
 }
 
-/* Outer layout wrapper */
 .leaderboard-card {
   width: 100%;
   max-width: 1300px; 
-  margin: auto; /* Magic Flexbox fallback: prevents top-clipping on tiny screens if the card overflows */
+  margin: auto; 
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -49,16 +47,13 @@ body, html, #root {
   text-align: center;
 }
 
-/* Leaderboard Title */
 .leaderboard-title {
   color: #ffffff;
   font-size: 30px !important;
   font-weight: 700;
-  /* INCREASED MARGIN-BOTTOM from 25px to 45px for more padding above podiums */
   margin: 0 0 45px 0;
 }
 
-/* Podium Container (Top 3 Side-by-Side Boxes) */
 .podium-container {
   display: flex;
   gap: 16px;
@@ -71,12 +66,11 @@ body, html, #root {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 18px;
-  /* INCREASED HEIGHT: Boxes are much taller */
   padding: 75px 15px; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Added to keep content perfectly centered */
+  justify-content: center; 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -85,7 +79,6 @@ body, html, #root {
   overflow: hidden;
 }
 
-/* Elevate the text content above the confetti */
 .podium-content {
   position: relative;
   z-index: 2;
@@ -95,7 +88,6 @@ body, html, #root {
   width: 100%;
 }
 
-/* Pulsating Keyframes for 1st Place Box */
 @keyframes pulseGlow {
   0% {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%);
@@ -114,7 +106,6 @@ body, html, #root {
   }
 }
 
-/* Pulsating Effect for 1st Place */
 .podium-box.rank-1 {
   animation: pulseGlow 2.5s infinite ease-in-out;
   transform: translateY(-4px);
@@ -129,7 +120,6 @@ body, html, #root {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Confetti Container & Pieces */
 .confetti-container {
   position: absolute;
   top: 0;
@@ -151,41 +141,18 @@ body, html, #root {
 }
 
 @keyframes confetti-fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(180px) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  50% { opacity: 1; }
+  100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
 }
 
 .podium-medal {
-  /* INCREASED SIZE */
   font-size: 75px;
   margin-bottom: 10px;
 }
 
-.podium-rank-label {
-  font-size: 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 8px;
-}
-
-.podium-box.rank-1 .podium-rank-label {
-  color: #ffffff;
-}
-
 .podium-name {
   color: #ffffff;
-  /* INCREASED SIZE */
   font-size: 38px;
   font-weight: 700;
   margin-bottom: 6px;
@@ -195,25 +162,10 @@ body, html, #root {
   max-width: 100%;
 }
 
-.podium-ern {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 13px;
-  font-family: monospace;
-  margin-bottom: 4px;
-  letter-spacing: 1px;
-}
-
-.podium-date {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
 .podium-time {
-  color: #fce18a; /* UPDATED to match table's yellow accent */
-  /* INCREASED SIZE slightly to match bigger names */
+  color: #fce18a; 
   font-size: 16px;
-  font-weight: 700; /* Bumped to 700 to make it pop like the table time */
+  font-weight: 700; 
 }
 
 .podium-empty {
@@ -223,7 +175,6 @@ body, html, #root {
   margin-top: 10px;
 }
 
-/* Table container layout */
 .table-container {
   width: 100%;
   margin-bottom: 25px;
@@ -238,7 +189,6 @@ body, html, #root {
   width: 100%;
 }
 
-/* Table Design */
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -258,24 +208,22 @@ body, html, #root {
 }
 
 .leaderboard-table td {
-  padding: 16px 18px; /* Increased padding for breathability */
-  font-size: 17px;    /* Increased size for readability */
-  font-weight: 600;   /* Bolder text */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12); /* Brighter divider lines */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Helps text pop off background */
+  padding: 16px 18px; 
+  font-size: 17px;    
+  font-weight: 600;   
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12); 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
 }
 
-/* Zebra striping for better row tracking */
 .leaderboard-table tbody tr:nth-child(even) {
   background: rgba(255, 255, 255, 0.03);
 }
 
 .leaderboard-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.15); /* Brighter hover */
+  background: rgba(255, 255, 255, 0.15); 
   transition: background 0.2s ease;
 }
 
-/* Specific Column Adjustments */
 .rank-col-header, .rank-col {
   width: 60px;
   text-align: center;
@@ -286,27 +234,17 @@ body, html, #root {
   font-size: 18px;
 }
 
-.ern-col-header {
-  width: 110px;
-}
-
-.ern-col {
-  font-family: monospace;
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 1px;
-}
-
 .date-col-header, .date-col {
   width: 110px;
-  color: rgba(255, 255, 255, 0.95); /* Increased opacity */
+  color: rgba(255, 255, 255, 0.95); 
 }
 
 .time-col-header, .time-col {
-  text-align: right;
+  text-align: left !important;
 }
 
 .time-col {
-  color: #fce18a; /* Soft yellow accent color to make times pop */
+  color: #fce18a; 
   font-size: 18px;
   font-weight: 700;
 }
@@ -318,107 +256,49 @@ body, html, #root {
   font-style: italic;
 }
 
-/* White Action Button */
-.btn-white {
-  width: 100%;
-  max-width: 320px;
-  padding: 16px;
-  border: none;
-  border-radius: 50px;
-  font-size: 17px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background-color: #004b50;
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn-white:hover {
-  background-color: #f0f4f4;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.btn-white:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
 /* ==========================================
    RESPONSIVE DESIGN FOR IPHONES & IPADS
    ========================================== */
-
-/* Tablets (iPad / iPad mini portrait) */
 @media screen and (max-width: 1024px) {
   .leaderboard-card {
     padding: 30px 24px; 
   }
-
-  .leaderboard-title {
-    font-size: 28px;
-    margin-bottom: 35px; /* Increased padding */
-  }
-
   .podium-box {
-    /* INCREASED HEIGHT for tablets */
     padding: 55px 10px; 
   }
-
   .podium-medal {
-    /* Bigger medal for tablets */
     font-size: 60px;
   }
-
   .podium-name {
-    /* INCREASED font */
     font-size: 26px;
   }
-
   .leaderboard-table th, 
   .leaderboard-table td {
     padding: 14px 14px;
-    font-size: 15px; /* Bumped up for tablet readability */
+    font-size: 15px; 
   }
 }
 
-/* ==========================================
-   LANDSCAPE ORIENTATION (iPads & Tablets)
-   ========================================== */
 @media screen and (max-height: 850px) and (orientation: landscape) {
   .leaderboard-card {
     padding: 24px; 
   }
-
-  .leaderboard-title {
-    font-size: 24px;
-    margin-bottom: 25px; /* Increased padding */
-  }
-
   .podium-container {
     margin-bottom: 15px;
   }
-
   .podium-box {
-    /* INCREASED HEIGHT for landscape iPads */
     padding: 40px 10px; 
   }
-
   .podium-medal {
     font-size: 45px;
     margin-bottom: 6px;
   }
-
   .podium-name {
     font-size: 22px;
   }
-
   .table-container {
     margin-bottom: 15px;
   }
-
-  /* Compress the table rows to fit more data on screen */
   .leaderboard-table th, 
   .leaderboard-table td {
     padding: 8px 12px;
@@ -426,102 +306,65 @@ body, html, #root {
   }
 }
 
-/* ==========================================
-   MOBILE SCREENS
-   ========================================== */
-/* Smaller Mobile Screens */
 @media screen and (max-width: 480px) {
   .leaderboard-card {
     padding: 20px 12px;
     border-radius: 20px;
   }
-
-  .leaderboard-title {
-    font-size: 22px;
-    margin-bottom: 25px; /* Increased padding */
-  }
-
-  /* Stack podium boxes vertically on narrow phones */
   .podium-container {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
   }
-
   .podium-box {
-    /* INCREASED HEIGHT for mobile phones */
     padding: 35px 12px; 
     border-radius: 14px;
   }
-
   .podium-box.rank-1 {
     transform: none; 
   }
-
   .podium-medal {
     font-size: 45px;
     margin-bottom: 4px;
   }
-
-  .podium-rank-label {
-    margin-bottom: 4px;
-    font-size: 11px;
-  }
-
   .podium-name {
     font-size: 24px;
   }
-
   .leaderboard-table th {
     padding: 12px 8px;
     font-size: 12px;
   }
-
   .leaderboard-table td {
     padding: 12px 8px;
     font-size: 13px;
   }
-
   .time-col {
-    font-size: 14px; /* Ensure mobile times stay large */
+    font-size: 14px; 
   }
-
   .date-col-header, .date-col {
     display: none; 
   }
-
   .rank-col-header, .rank-col {
     width: 40px;
   }
-
-  .ern-col-header, .ern-col {
-    width: 80px;
-  }
 }
 
-/* Extreme Mobile Landscape (Phones turned sideways) */
 @media screen and (max-height: 500px) and (orientation: landscape) {
   .leaderboard-title {
     font-size: 20px;
   }
-  
   .podium-container {
     gap: 8px;
   }
-  
   .podium-box {
-    /* HEIGHT INCREASE for sideways phones */
     padding: 25px 8px; 
   }
-  
   .podium-medal {
     font-size: 32px;
   }
-
   .podium-name {
     font-size: 18px;
   }
-  
   .leaderboard-table th, 
   .leaderboard-table td {
     padding: 6px 8px;

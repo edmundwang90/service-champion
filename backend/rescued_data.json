@@ -1,0 +1,372 @@
+[
+  {
+    "_id": "6a826184f2e39f6280dd99f8",
+    "badgeName": "Kenneth",
+    "employeeId": "138655L",
+    "galaxyId": "CCAPSOU",
+    "timeTaken": 53476,
+    "createdAt": "2026-08-17T01:19:00.562Z",
+    "updatedAt": "2026-08-17T01:19:00.562Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8264f2f2e39f6280dd99f9",
+    "badgeName": "Peter",
+    "employeeId": "151644K",
+    "galaxyId": "CCAPETC",
+    "timeTaken": 75358,
+    "createdAt": "2026-08-17T01:33:38.857Z",
+    "updatedAt": "2026-08-17T01:33:38.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a826621f2e39f6280dd99fa",
+    "badgeName": "Aiimy",
+    "employeeId": "150458K",
+    "galaxyId": "CCAAWP",
+    "timeTaken": 91126,
+    "createdAt": "2026-08-17T01:38:41.050Z",
+    "updatedAt": "2026-08-17T01:38:41.050Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a827393f2e39f6280dd99fb",
+    "badgeName": "GARRI",
+    "employeeId": "146966A",
+    "galaxyId": "CCAPTG",
+    "timeTaken": 108657,
+    "createdAt": "2026-08-17T02:36:03.910Z",
+    "updatedAt": "2026-08-17T02:36:03.910Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a827667f2e39f6280dd99fc",
+    "badgeName": "Angela",
+    "employeeId": "151578K",
+    "galaxyId": "CCAAYD",
+    "timeTaken": 80772,
+    "createdAt": "2026-08-17T02:48:07.869Z",
+    "updatedAt": "2026-08-17T02:48:07.869Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a827e25f2e39f6280dd99fd",
+    "badgeName": "Rose",
+    "employeeId": "148047A",
+    "galaxyId": "CCAROZ",
+    "timeTaken": 79305,
+    "createdAt": "2026-08-17T03:21:09.953Z",
+    "updatedAt": "2026-08-17T03:21:09.953Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a827f17f2e39f6280dd99fe",
+    "badgeName": "Maki",
+    "employeeId": "140690G",
+    "galaxyId": "CCAFUMM",
+    "timeTaken": 76051,
+    "createdAt": "2026-08-17T03:25:11.827Z",
+    "updatedAt": "2026-08-17T03:25:11.827Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a827fedf2e39f6280dd99ff",
+    "badgeName": "Richo",
+    "employeeId": "146805G",
+    "galaxyId": "CCARBJ",
+    "timeTaken": 71634,
+    "createdAt": "2026-08-17T03:28:45.301Z",
+    "updatedAt": "2026-08-17T03:28:45.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a828304f2e39f6280dd9a00",
+    "badgeName": "Ceci",
+    "employeeId": "151685L",
+    "galaxyId": "CCACEK",
+    "timeTaken": 57976,
+    "createdAt": "2026-08-17T03:41:56.491Z",
+    "updatedAt": "2026-08-17T03:41:56.491Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a828a68f2e39f6280dd9a01",
+    "badgeName": "Hillary",
+    "employeeId": "151851F",
+    "galaxyId": "CCAHIWS",
+    "timeTaken": 68657,
+    "createdAt": "2026-08-17T04:13:28.618Z",
+    "updatedAt": "2026-08-17T04:13:28.618Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a829121f2e39f6280dd9a02",
+    "badgeName": "Ava",
+    "employeeId": "144672C",
+    "galaxyId": "CCASOOY",
+    "timeTaken": 64290,
+    "createdAt": "2026-08-17T04:42:09.692Z",
+    "updatedAt": "2026-08-17T04:42:09.692Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a829673f2e39f6280dd9a03",
+    "badgeName": "Charlie",
+    "employeeId": "147396B",
+    "galaxyId": "CCAJIJB",
+    "timeTaken": 73940,
+    "createdAt": "2026-08-17T05:04:51.621Z",
+    "updatedAt": "2026-08-17T05:04:51.621Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82971af2e39f6280dd9a04",
+    "badgeName": "Pimmy",
+    "employeeId": "144926B",
+    "galaxyId": "CCAPIMT",
+    "timeTaken": 49383,
+    "createdAt": "2026-08-17T05:07:38.831Z",
+    "updatedAt": "2026-08-17T05:07:38.831Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82ab27f2e39f6280dd9a05",
+    "badgeName": "Pixie",
+    "employeeId": "150293B",
+    "galaxyId": "CCAPW",
+    "timeTaken": 54568,
+    "createdAt": "2026-08-17T06:33:11.031Z",
+    "updatedAt": "2026-08-17T06:33:11.031Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82ac29f2e39f6280dd9a06",
+    "badgeName": "Abby",
+    "employeeId": "142088D",
+    "galaxyId": "CCAABTC",
+    "timeTaken": 71109,
+    "createdAt": "2026-08-17T06:37:29.791Z",
+    "updatedAt": "2026-08-17T06:37:29.791Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82afa6f2e39f6280dd9a07",
+    "badgeName": "Bonie",
+    "employeeId": "147751E",
+    "galaxyId": "CCAKOBB",
+    "timeTaken": 57519,
+    "createdAt": "2026-08-17T06:52:22.633Z",
+    "updatedAt": "2026-08-17T06:52:22.633Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82b248f2e39f6280dd9a08",
+    "badgeName": "Eloise",
+    "employeeId": "134537L",
+    "galaxyId": "CCADFNA",
+    "timeTaken": 47980,
+    "createdAt": "2026-08-17T07:03:36.022Z",
+    "updatedAt": "2026-08-17T07:03:36.022Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82be63f2e39f6280dd9a09",
+    "badgeName": "Pao",
+    "employeeId": "150164D",
+    "galaxyId": "CCANIPP",
+    "timeTaken": 56773,
+    "createdAt": "2026-08-17T07:55:15.297Z",
+    "updatedAt": "2026-08-17T07:55:15.297Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82c247f2e39f6280dd9a0a",
+    "badgeName": "Jasmine",
+    "employeeId": "152991D",
+    "galaxyId": "CCAJALI",
+    "timeTaken": 64608,
+    "createdAt": "2026-08-17T08:11:51.766Z",
+    "updatedAt": "2026-08-17T08:11:51.766Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82c336f2e39f6280dd9a0b",
+    "badgeName": "Jolin",
+    "employeeId": "152993C",
+    "galaxyId": "CCAJOCH",
+    "timeTaken": 68392,
+    "createdAt": "2026-08-17T08:15:50.543Z",
+    "updatedAt": "2026-08-17T08:15:50.543Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82c623f2e39f6280dd9a0c",
+    "badgeName": "Boey",
+    "employeeId": "139074H",
+    "galaxyId": "CCATBS",
+    "timeTaken": 61706,
+    "createdAt": "2026-08-17T08:28:19.184Z",
+    "updatedAt": "2026-08-17T08:28:19.184Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82f6270417b3b815dc0300",
+    "badgeName": "Edmund",
+    "employeeId": "162728F",
+    "galaxyId": "CCAWEE",
+    "timeTaken": 13000,
+    "createdAt": "2026-08-17T11:53:11.321Z",
+    "updatedAt": "2026-08-17T11:53:11.321Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82f75a0417b3b815dc0301",
+    "badgeName": "Edmund",
+    "employeeId": "383734G",
+    "galaxyId": "CCADFFF",
+    "timeTaken": 3392,
+    "createdAt": "2026-08-17T11:58:18.480Z",
+    "updatedAt": "2026-08-17T11:58:18.480Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82f7977e67670ccc97cb6c",
+    "badgeName": "Lily",
+    "employeeId": "293844G",
+    "galaxyId": "CCALIL",
+    "timeTaken": 5854,
+    "createdAt": "2026-08-17T11:59:19.169Z",
+    "updatedAt": "2026-08-17T11:59:19.169Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a82f7b37e67670ccc97cb6d",
+    "badgeName": "Adamn",
+    "employeeId": "228484G",
+    "galaxyId": "CCAJHD",
+    "timeTaken": 8779,
+    "createdAt": "2026-08-17T11:59:47.279Z",
+    "updatedAt": "2026-08-17T11:59:47.279Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a83b303708009be63b575ab",
+    "badgeName": "Apple",
+    "employeeId": "262383F",
+    "galaxyId": "CCATES",
+    "timeTaken": 5560,
+    "createdAt": "2026-08-18T01:18:59.033Z",
+    "updatedAt": "2026-08-18T01:18:59.033Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8523c428667f44dc2ac828",
+    "badgeName": "Ben",
+    "employeeId": "143607F",
+    "galaxyId": "CCABJV",
+    "timeTaken": 49256,
+    "createdAt": "2026-08-19T03:32:20.400Z",
+    "updatedAt": "2026-08-19T03:32:20.400Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8524a828667f44dc2ac829",
+    "badgeName": "Ice",
+    "employeeId": "143809F",
+    "galaxyId": "CCAICCA",
+    "timeTaken": 48569,
+    "createdAt": "2026-08-19T03:36:08.021Z",
+    "updatedAt": "2026-08-19T03:36:08.021Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a852e6e28667f44dc2ac82a",
+    "badgeName": "Lin chihhsin",
+    "employeeId": "146706F",
+    "galaxyId": "CCAUPR",
+    "timeTaken": 56509,
+    "createdAt": "2026-08-19T04:17:50.591Z",
+    "updatedAt": "2026-08-19T04:17:50.591Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8530e128667f44dc2ac82b",
+    "badgeName": "Pitcha",
+    "employeeId": "141176E",
+    "galaxyId": "CCAPITP",
+    "timeTaken": 48408,
+    "createdAt": "2026-08-19T04:28:17.577Z",
+    "updatedAt": "2026-08-19T04:28:17.577Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a85355d28667f44dc2ac82c",
+    "badgeName": "Liz",
+    "employeeId": "142077L",
+    "galaxyId": "CCSJCDB",
+    "timeTaken": 84871,
+    "createdAt": "2026-08-19T04:47:25.718Z",
+    "updatedAt": "2026-08-19T04:47:25.718Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8536d928667f44dc2ac82d",
+    "badgeName": "Ruby",
+    "employeeId": "140071L",
+    "galaxyId": "CCATHR",
+    "timeTaken": 75806,
+    "createdAt": "2026-08-19T04:53:45.750Z",
+    "updatedAt": "2026-08-19T04:53:45.750Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8537ce28667f44dc2ac82e",
+    "badgeName": "Samiksha",
+    "employeeId": "146948B",
+    "galaxyId": "CCAPTDE",
+    "timeTaken": 45791,
+    "createdAt": "2026-08-19T04:57:50.363Z",
+    "updatedAt": "2026-08-19T04:57:50.363Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8539a728667f44dc2ac82f",
+    "badgeName": "Cherry",
+    "employeeId": "151545J",
+    "galaxyId": "CCADTC",
+    "timeTaken": 67119,
+    "createdAt": "2026-08-19T05:05:43.269Z",
+    "updatedAt": "2026-08-19T05:05:43.269Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a85428928667f44dc2ac830",
+    "badgeName": "Sunny",
+    "employeeId": "142763A",
+    "galaxyId": "CCAUEEK",
+    "timeTaken": 46759,
+    "createdAt": "2026-08-19T05:43:37.467Z",
+    "updatedAt": "2026-08-19T05:43:37.467Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a8543d328667f44dc2ac831",
+    "badgeName": "Wendy",
+    "employeeId": "150561B",
+    "galaxyId": "CCANCT",
+    "timeTaken": 51224,
+    "createdAt": "2026-08-19T05:49:07.390Z",
+    "updatedAt": "2026-08-19T05:49:07.390Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a85471a28667f44dc2ac832",
+    "badgeName": "Lily",
+    "employeeId": "140674G",
+    "galaxyId": "CCAPRSS",
+    "timeTaken": 72615,
+    "createdAt": "2026-08-19T06:03:06.540Z",
+    "updatedAt": "2026-08-19T06:03:06.540Z",
+    "__v": 0
+  }
+]

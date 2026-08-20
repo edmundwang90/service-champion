@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,19 @@ import './LeaderboardPage.css';
 
 function LeaderboardPage() {
   const [records, setRecords] = useState([]);
+  
+  // --- CHANGE: Automatically initialize to the Current Week instead of 'all' ---
+  const [selectedWeek, setSelectedWeek] = useState(() => {
+    const today = new Date();
+    const date = new Date(today);
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    const monday = new Date(date);
+    monday.setDate(diff);
+    monday.setHours(0, 0, 0, 0);
+    return String(monday.getTime());
+  });
+
   const navigate = useNavigate();
 
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
@@ -35,32 +48,81 @@ function LeaderboardPage() {
     return () => socket.disconnect();
   }, [apiUrl]);
 
-  // UPDATED: Now uses the consistent MM:SS format with padded zeros
+  // --- LOGIC: Find the Monday of a given date ---
+  const getMondayTime = (dateInput) => {
+    const date = new Date(dateInput);
+    if (isNaN(date.getTime())) return null;
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    const monday = new Date(date);
+    monday.setDate(diff);
+    monday.setHours(0, 0, 0, 0);
+    return monday.getTime();
+  };
+
+  // --- LOGIC: Format the week label for the dropdown and title ---
+  const getWeekLabel = (mondayTime, includeTag = true) => {
+    const monday = new Date(Number(mondayTime));
+    const friday = new Date(monday);
+    friday.setDate(monday.getDate() + 4); 
+
+    const monMonth = monday.toLocaleString('default', { month: 'short' });
+    const friMonth = friday.toLocaleString('default', { month: 'short' });
+    const year = monday.getFullYear();
+
+    let label = '';
+    if (monMonth === friMonth) {
+      label = `${monday.getDate()}-${friday.getDate()} ${monMonth} ${year}`;
+    } else {
+      label = `${monday.getDate()} ${monMonth} - ${friday.getDate()} ${friMonth} ${year}`;
+    }
+
+    if (!includeTag) return label;
+
+    const currentMonday = getMondayTime(new Date());
+    if (mondayTime === currentMonday) return `${label} (Current Week)`;
+    if (mondayTime === currentMonday + (7 * 24 * 60 * 60 * 1000)) return `${label} (Coming Week)`;
+    return label;
+  };
+
+  // --- LOGIC: Hardcode exactly 4 weeks (Coming, Current, Past 1, Past 2) ---
+  const availableWeeks = useMemo(() => {
+    const today = new Date();
+    const currentMonday = getMondayTime(today);
+    const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+
+    return [
+      currentMonday + oneWeekMs,       // Coming Week
+      currentMonday,                   // Current Week
+      currentMonday - oneWeekMs,       // Past Week 1
+      currentMonday - (2 * oneWeekMs)  // Past Week 2
+    ];
+  }, []);
+
+  // --- LOGIC: Filter the records based on dropdown ---
+  const filteredRecords = useMemo(() => {
+    if (selectedWeek === 'all') return records;
+    return records.filter(record => {
+      const recordMonday = getMondayTime(record.createdAt || record.date);
+      return recordMonday === Number(selectedWeek);
+    });
+  }, [records, selectedWeek]);
+
+
   const formatTime = (timeInMs) => {
     const totalSeconds = Math.floor(timeInMs / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     
-    // Pad single digits with a leading zero (e.g., 5 becomes "05")
     const paddedMin = String(minutes).padStart(2, '0');
     const paddedSec = String(seconds).padStart(2, '0');
     
     return `${paddedMin}:${paddedSec}`;
   }; 
 
-  const formatEmpId = (empId) => {
-    if (!empId) return '';
-    if (empId.length !== 7) return empId; 
-    return `${empId.substring(0, 2)}****${empId.substring(6)}`;
-  };
-
-  // NEW FUNCTION: Hide the last three characters of the Galaxy ID
   const formatGalaxyId = (galaxyId) => {
     if (!galaxyId) return 'N/A';
-    // If the ID is 3 characters or less, just replace it all with asterisks
     if (galaxyId.length <= 3) return '***'; 
-    
-    // Keep everything up to the last 3 characters, then append '***'
     return galaxyId.substring(0, galaxyId.length - 3) + '***';
   };
 
@@ -74,51 +136,48 @@ function LeaderboardPage() {
     return `${day}/${month}/${year}`;
   };
 
-  // --- STRICT CAMPAIGN DATE LOGIC ---
-  const getCampaignWeekRange = () => {
-    const today = new Date();
-    const dayOfWeek = today.getDay(); // 0 is Sunday, 1 is Monday... 6 is Saturday
-    const month = today.getMonth(); // 7 is August (0-indexed)
-    const year = today.getFullYear();
-
-    // If today is a weekend (0 or 6) OR we are not in August 2026, show N/A
-    if (dayOfWeek === 0 || dayOfWeek === 6 || month !== 7 || year !== 2026) {
-      return 'N/A';
-    }
-
-    // Otherwise, we are inside an active campaign week. Calculate the Mon-Fri range.
-    const monday = new Date(today);
-    monday.setDate(today.getDate() - (dayOfWeek - 1)); // Snap back to the current week's Monday
-
-    const friday = new Date(monday);
-    friday.setDate(monday.getDate() + 4); // Friday is 4 days after Monday
-
-    const monMonth = monday.toLocaleString('default', { month: 'short' });
-    const friMonth = friday.toLocaleString('default', { month: 'short' });
-    const currentYear = monday.getFullYear();
-
-    // Dynamically formats string (e.g., "3-7 Aug 2026" or "31 Aug - 4 Sep 2026")
-    if (monMonth === friMonth) {
-      return `${monday.getDate()}-${friday.getDate()} ${monMonth} ${currentYear}`;
-    } else {
-      return `${monday.getDate()} ${monMonth} - ${friday.getDate()} ${friMonth} ${currentYear}`;
-    }
-  };
-
-  const topTenRecords = records.slice(0, 10);
+  const topTenRecords = filteredRecords.slice(0, 10);
   const topThree = topTenRecords.slice(0, 3);
   const remainingRecords = topTenRecords.slice(3);
 
   const podiumOrder = [1, 0, 2];
   const medals = ['🥈', '🥇', '🥉'];
-  const labels = ['2nd Place', '1st Place', '3rd Place'];
 
   return (
     <div className="leaderboard-container">
       <div className="leaderboard-card">
         
-        {/* INLINE DYNAMIC DATE IN THE TITLE */}
-        <h2 className="leaderboard-title">Service Champion Leaderboard ({getCampaignWeekRange()}) 🏆</h2> 
+        <div style={{ marginBottom: '35px', textAlign: 'center' }}>
+          {/* TITLE WITH DYNAMIC DATE RANGE */}
+          <h2 className="leaderboard-title" style={{ marginBottom: '15px' }}>
+            Service Champion Leaderboard {selectedWeek === 'all' ? '(All-Time)' : `(${getWeekLabel(selectedWeek, false)})`} 🏆
+          </h2> 
+          
+          {/* DROPDOWN MENU */}
+          <select 
+            value={selectedWeek}
+            onChange={(e) => setSelectedWeek(e.target.value)}
+            style={{
+              padding: '8px 16px',
+              fontSize: '15px',
+              fontWeight: '600',
+              borderRadius: '8px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              color: '#fff',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              cursor: 'pointer',
+              outline: 'none',
+              fontFamily: 'inherit'
+            }}
+          >
+            <option value="all" style={{ color: '#000' }}>All-Time Records</option>
+            {availableWeeks.map(weekTime => (
+              <option key={weekTime} value={weekTime} style={{ color: '#000' }}>
+                {getWeekLabel(weekTime, true)}
+              </option>
+            ))}
+          </select>
+        </div>
         
         <div className="podium-container">
           {podiumOrder.map((recordIndex, displayIdx) => {
@@ -152,7 +211,6 @@ function LeaderboardPage() {
 
                 <div className="podium-content">
                   <div className="podium-medal">{medals[displayIdx]}</div>
-                  {/* <div className="podium-rank-label">{labels[displayIdx]}</div> */}
                   {record ? (
                     <>
                       <div className="podium-name" title={record.badgeName}>{record.badgeName}</div>
@@ -174,10 +232,8 @@ function LeaderboardPage() {
                 <tr>
                   <th className="rank-col-header">Rank</th>
                   <th>Badge Name</th>
-                  {/* <th className="ern-col-header">ERN</th> */}
-                  {/* NEW COLUMN */}
                   <th>Cathay ID</th>
-                  <th className="time-col-header">Time (MM:SS)</th>
+                  <th className="time-col-header">Time taken (MM:SS)</th>
                   <th className="date-col-header">Date</th>
                 </tr>
               </thead>
@@ -186,8 +242,6 @@ function LeaderboardPage() {
                   <tr key={record._id || index}>
                     <td className="rank-col">#{index + 4}</td>
                     <td>{record.badgeName}</td>
-                    {/* <td className="ern-col">{formatEmpId(record.employeeId)}</td> */}
-                    {/* UPDATED DATA CELL USING NEW FUNCTION */}
                     <td>{formatGalaxyId(record.galaxyId)}</td>
                     <td className="time-col">
                       {formatTime(record.timeTaken)}
@@ -197,14 +251,12 @@ function LeaderboardPage() {
                 ))}
                 {topTenRecords.length === 0 && (
                   <tr>
-                    {/* UPDATED: colSpan is now 6 to span all columns */}
-                    <td colSpan="6" className="empty-state">No records yet. Be the first to set the bar! 🚀</td>
+                    <td colSpan="5" className="empty-state">No records found for this week. Be the first to set the bar! 🚀</td>
                   </tr>
                 )}
                 {topTenRecords.length > 0 && remainingRecords.length === 0 && (
                   <tr>
-                    {/* UPDATED: colSpan is now 6 */}
-                    <td colSpan="6" className="empty-state">All current leaders are shown in the podium above! 🌟</td>
+                    <td colSpan="5" className="empty-state">All current leaders are shown in the podium above! 🌟</td>
                   </tr>
                 )}
               </tbody>

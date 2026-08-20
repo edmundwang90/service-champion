@@ -1,3 +1,7 @@
+/* ==========================================
+   LOGIN PAGE STYLING (Matching Dashboard Theme)
+   ========================================== */
+
 .login-container {
   display: flex;
   align-items: center;
@@ -5,50 +9,94 @@
   height: 100vh;
   height: 100dvh; 
   width: 100vw; 
+  overflow: hidden; 
   background-color: hsl(184, 100%, 9%); 
   background-image: linear-gradient(rgba(0, 30, 35, 0.65), rgba(0, 30, 35, 0.65)), url('./cabin.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; 
-  padding: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   box-sizing: border-box;
+  padding: 20px;
 }
 
-.auth-card {
-  background: rgba(60, 65, 70, 0.4);
-  backdrop-filter: blur(25px) saturate(130%);
-  -webkit-backdrop-filter: blur(25px) saturate(130%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px) saturate(120%);
+  -webkit-backdrop-filter: blur(30px) saturate(120%);
+  padding: 45px 40px; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 24px;
-  padding: 40px 35px;
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  animation: fadeInLogin 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInLogin {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-title {
   color: #ffffff;
-}
-
-.auth-icon {
-  font-size: 48px;
-  margin-bottom: 12px;
-}
-
-.auth-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  margin: 0 0 6px 0;
-  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
 }
 
-.auth-subtitle {
+.login-subtitle {
+  color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 24px 0;
+  margin: 0;
+  font-weight: 400;
 }
 
-.login-input {
+.login-error {
+  background: rgba(255, 77, 79, 0.2);
+  border: 1px solid rgba(255, 77, 79, 0.4);
+  color: #ff7875;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-group {
+  text-align: left;
+}
+
+.login-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-group input {
   width: 100%;
-  padding: 14px 16px;
+  height: 48px;
+  padding: 0 16px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
@@ -57,39 +105,45 @@
   box-sizing: border-box;
   outline: none;
   transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
 }
 
-.login-input:focus {
+.login-group input:focus {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
-.btn-auth-login {
+.login-group input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.btn-login {
   width: 100%;
   height: 48px;
+  margin-top: 10px;
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(0, 143, 153, 0.9) 0%, rgba(0, 108, 115, 0.9) 100%);
   color: white;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 120, 128, 0.3);
   transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 120, 128, 0.3);
 }
 
-.btn-auth-login:hover {
+.btn-login:hover:not(:disabled) {
   background: linear-gradient(135deg, rgba(0, 164, 176, 1) 0%, rgba(0, 127, 135, 1) 100%);
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 120, 128, 0.4);
 }
 
-.error-message {
-  background: rgba(255, 77, 79, 0.2);
-  border: 1px solid rgba(255, 77, 79, 0.4);
-  color: #ff7875;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 14px;
+.btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-login:active {
+  transform: scale(0.98);
 }

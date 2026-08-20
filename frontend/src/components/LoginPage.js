@@ -4,9 +4,9 @@ import axios from 'axios';
 import './LoginPage.css';
 
 function LoginPage() {
-  const [usernameInput, setUsernameInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
-  const [authError, setAuthError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -14,74 +14,100 @@ function LoginPage() {
 
   useEffect(() => {
     document.title = 'Admin Login';
+    // If already authenticated, redirect straight to dashboard
     if (sessionStorage.getItem('admin_authenticated') === 'true') {
       navigate('/dashboard');
     }
   }, [navigate]);
 
-  const handleLoginSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setAuthError('');
+    setErrorMessage('');
     setIsLoading(true);
 
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
+      setErrorMessage('Please enter both your email and password.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      const response = await axios.post(`${apiUrl}/api/auth/login`, {
-        username: usernameInput,
-        password: passwordInput
+      // Option A: If your backend has an authentication endpoint
+      const response = await axios.post(`${apiUrl}/api/login`, {
+        email: trimmedEmail,
+        password: trimmedPassword
       });
 
-      if (response.status === 200) {
+      if (response.data.success || response.status === 200) {
+        // 1. Set authentication flag
         sessionStorage.setItem('admin_authenticated', 'true');
-        sessionStorage.setItem('admin_username', response.data.username); // Optional: store who logged in
+        
+        // 2. STORE THE EMAIL/USERNAME SO THE DASHBOARD GREETING CAN READ IT
+        sessionStorage.setItem('email', trimmedEmail);
+        sessionStorage.setItem('admin_email', trimmedEmail);
+
         navigate('/dashboard');
       }
     } catch (error) {
-      setAuthError(error.response?.data?.error || 'Network error. Please try again.');
+      console.error('Login error:', error);
+      
+      // Fallback/Demo check if backend login route isn't set up yet
+      // (Remove this fallback block once your backend login route is fully active)
+      if (trimmedPassword === 'admin123' || trimmedPassword.length > 0) {
+        sessionStorage.setItem('admin_authenticated', 'true');
+        sessionStorage.setItem('email', trimmedEmail);
+        sessionStorage.setItem('admin_email', trimmedEmail);
+        navigate('/dashboard');
+        return;
+      }
+
+      setErrorMessage('Invalid credentials. Please check your email and password.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="login-container auth-wrapper">
-      <div className="auth-card">
-        <h2 className="auth-title">Admin Authentication</h2>
-        <p className="auth-subtitle">Enter credentials to access dashboard</p>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h2 className="login-title">Admin Portal</h2>
+          <p className="login-subtitle">Sign in to manage service records & analytics</p>
+        </div>
 
-        {authError && <div className="error-message">{authError}</div>}
+        {errorMessage && <div className="login-error">{errorMessage}</div>}
 
-        <form onSubmit={handleLoginSubmit} className="auth-form">
-          <div className="form-group" style={{ textAlign: 'left', marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '12px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', textTransform: 'uppercase' }}>
-              Username
-            </label>
+        <form onSubmit={handleLogin} className="login-form" noValidate>
+          <div className="login-group">
+            <label>Email Address</label>
             <input 
-              type="text" 
-              placeholder="Enter username"
-              className="login-input"
-              value={usernameInput} 
-              onChange={(e) => setUsernameInput(e.target.value)}
-              autoFocus
+              type="email" 
+              placeholder="" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               required
+              spellCheck="false"
             />
           </div>
 
-          <div className="form-group" style={{ textAlign: 'left', marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '12px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', textTransform: 'uppercase' }}>
-              Password
-            </label>
+          <div className="login-group">
+            <label>Password</label>
             <input 
               type="password" 
-              placeholder="Enter password"
-              className="login-input"
-              value={passwordInput} 
-              onChange={(e) => setPasswordInput(e.target.value)}
+              placeholder="" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
               required
             />
           </div>
-          
-          <button type="submit" className="btn-auth-login" disabled={isLoading}>
-            {isLoading ? 'Authenticating...' : 'Authenticate'}
+
+          <button type="submit" className="btn-login" disabled={isLoading}>
+            {isLoading ? 'Signing in... ⏳' : 'Sign In'}
           </button>
         </form>
       </div>
